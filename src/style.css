@@ -89,20 +89,16 @@ body {
   padding-right: 1rem;
 }
 
-.nav-btns-two > div:last-child{
+.nav-btns-two > div:last-child {
   padding-left: 1rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
   display: flex;
   gap: 1rem;
   align-items: center;
+  justify-content: start;
   padding-right: 1rem;
   font-size: 1.5rem;
-}
-
-.nav-btn > p {
-  position: relative;
-  /* top: 7px; */
 }
 
 .nav-btn:hover {
@@ -125,13 +121,53 @@ body {
   grid-column: 1 / 3;
 }
 
+#add-project-btn {
+  visibility: hidden;
+  justify-self: end;
+  border-radius: 100%;
+  border: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.project > #add-project-btn {
+  position: relative;
+  left: 35px;
+}
+
+.project:hover {
+  #add-project-btn {
+    visibility: visible;
+  }
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .add-task-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  visibility: hidden;
+  position: absolute;
+  top: 40vh;
+  left: 40vw;
 }
 
 textarea {
   resize: none;
+}
+
+.add-project-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  visibility: hidden;
+  position: absolute;
+  top: 40vh;
+  left: 40vw;
 }
