@@ -58,7 +58,29 @@
         </div>
       </div>
       <div class="main-content">
-
+        <form class="add-task-form">
+          <div>
+            <label for="task">Task:</label>
+            <input type="text" id="task" required />
+          </div>
+          <div>
+            <label for="due-date">Due Date:</label>
+            <input type="date" id="due-date" required />
+          </div>
+          <div>
+            <label for="priority">Priority: </label>
+            <select name="priority" id="priority">
+              <option value="p1">Priority 1</option>
+              <option value="p2">Priority 2</option>
+              <option value="p3">Priority 3</option>
+              <option value="p4">Priority 4</option>
+            </select>
+          </div>
+          <div>
+            <label for="description">Description</label>
+            <textarea name="description" id="description" cols="40" rows="5"></textarea>
+          </div>
+        </form>
       </div>
   </body>
 </html>
