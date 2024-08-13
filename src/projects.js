@@ -5,6 +5,7 @@ class project {
     this.todoList = [];
   }
 
+  // Adds a todo object to the todoList array
   addTodo(todoItem) {
     this.todoList.push(todoItem);
   }
