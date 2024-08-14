@@ -217,3 +217,29 @@ textarea {
   left: 40vw;
   box-shadow: 3px 4px 15px 1px rgba(98, 93, 93, 1);
 }
+
+.delete-todo-btn {
+  background-color: rgb(241, 41, 41);
+  border: none;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  background-image: url("/src/delete-outline.svg");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.edit-todo-btn {
+  background-color: rgb(18, 180, 244);
+  border: none;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  background-image: url("/src/pencil-plus-outline.svg");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
