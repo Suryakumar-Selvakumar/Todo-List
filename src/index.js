@@ -8,6 +8,7 @@ projectsArray.push(inbox);
 
 // TASK FORM
 const taskForm = document.querySelector(".add-task-form");
+const cancelTaskBtn = document.querySelector("#cancel");
 
 // Event listener to submit add task form and get the formData
 taskForm.addEventListener("submit", (event) => {
@@ -15,7 +16,18 @@ taskForm.addEventListener("submit", (event) => {
   new FormData(taskForm);
   taskForm.reset();
   taskForm.style.cssText = "visibility: hidden";
+  console.log(taskForm);
 });
+
+// Creating a select dropdown, assigning the default option - "inbox" to it, then inserting it before the cancel button in add task form
+const selectProjects = document.createElement("select");
+selectProjects.setAttribute("name", "projects");
+const projectDefaultOption = document.createElement("option");
+projectDefaultOption.setAttribute("selected", "selected");
+projectDefaultOption.setAttribute("value", "inbox");
+projectDefaultOption.textContent = "inbox";
+selectProjects.appendChild(projectDefaultOption);
+cancelTaskBtn.insertAdjacentElement("beforebegin", selectProjects);
 
 // Event listener to use the formData to call the todo constructor
 taskForm.addEventListener("formdata", (e) => {
@@ -25,7 +37,7 @@ taskForm.addEventListener("formdata", (e) => {
   for (const value of data.values()) {
     dataArray.push(value);
   }
-  console.log(dataArray);
+
   titleValue = dataArray[0];
   descriptionValue = dataArray[1];
   dueDateValue = dataArray[2];
@@ -39,10 +51,12 @@ taskForm.addEventListener("formdata", (e) => {
     projectValue
   );
 
-  //   Add code to push todo into the currently selected project
+  //   Code to push todo into the currently selected project
   projectsArray.forEach((item) => {
-    if(item.projectName === projectValue)
-  })
+    if (item.projectName === projectValue) {
+      item.addTodo(todoObj);
+    }
+  });
 });
 
 // Event listener to make the add task form visible after clicking add task button
@@ -52,7 +66,6 @@ addTaskBtn.addEventListener("click", () => {
 });
 
 // Event listener to close the add task form upon clicking cancel
-const cancelTaskBtn = document.querySelector("#cancel");
 cancelTaskBtn.addEventListener("click", () => {
   taskForm.reset();
   taskForm.style.cssText = "visibility: hidden";
@@ -75,15 +88,7 @@ projectForm.addEventListener("submit", (event) => {
   projectForm.style.cssText = "visibility: hidden";
 });
 
-// Creating a select dropdown, assigning the default option - "inbox" to it, then inserting it before the cancel button in add task form
-const selectProjects = document.createElement("select");
-const projectDefaultOption = document.createElement("option");
-projectDefaultOption.setAttribute("selected", "selected");
-projectDefaultOption.textContent = "inbox";
-selectProjects.appendChild(projectDefaultOption);
-cancelTaskBtn.insertAdjacentElement("beforebegin", selectProjects);
-
-// Event listener that uses the formData to call the project constructor and add newly created projects as options to the select dropdown
+// Event listener that uses the formData to call the project constructor
 projectForm.addEventListener("formdata", (e) => {
   const data = e.formData;
   const dataArray = [];
@@ -95,6 +100,7 @@ projectForm.addEventListener("formdata", (e) => {
   const projectObj = new project(projectValue);
   projectsArray.push(projectObj);
 
+  // Add newly created projects as options to the select dropdown
   const projectOption = document.createElement("option");
   projectOption.setAttribute("value", projectValue);
   projectOption.textContent = `${projectValue}`;

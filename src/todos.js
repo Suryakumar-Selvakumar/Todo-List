@@ -1,5 +1,4 @@
 class todo {
-  completedStatus;
   constructor(title, dueDate, priority, description, project) {
     this.title = title;
     this.description = description;
