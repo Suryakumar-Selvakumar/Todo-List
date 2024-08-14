@@ -148,6 +148,19 @@ body {
   flex-direction: column;
 }
 
+.task-form-container {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 1;
+  visibility: hidden;
+}
+
 .add-task-form {
   display: flex;
   flex-direction: column;
@@ -156,10 +169,24 @@ body {
   position: absolute;
   top: 40vh;
   left: 40vw;
+  box-shadow: 3px 4px 15px 1px rgba(98, 93, 93, 1);
 }
 
 textarea {
   resize: none;
+}
+
+.project-form-container {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 1;
+  visibility: hidden;
 }
 
 .add-project-form {
@@ -170,4 +197,5 @@ textarea {
   position: absolute;
   top: 40vh;
   left: 40vw;
+  box-shadow: 3px 4px 15px 1px rgba(98, 93, 93, 1);
 }

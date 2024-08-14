@@ -6,41 +6,45 @@
     <title>Todo List</title>
   </head>
   <body>
-    <form class="add-task-form">
-      <div>
-        <label for="task">Task:</label>
-        <input type="text" id="task" name="task" required/>
-      </div>
-      <div>
-        <label for="description">Description</label>
-        <textarea name="description" id="description" cols="40" rows="5"></textarea>
-      </div>
-      <div>
-        <label for="due-date">Due Date:</label>
-        <input type="date" id="due-date" name="due-date" required/>
-        <label for="priority">Priority: </label>
-        <select name="priority" id="priority">
-          <option value="p1">Priority 1</option>
-          <option value="p2">Priority 2</option>
-          <option value="p3">Priority 3</option>
-          <option value="p4">Priority 4</option>
-        </select>
-      </div>
-      <div id="last-form-div">
-        <button id="cancel" type="button">Cancel</button>
-        <button type="submit">Add Task</button>
-      </div>
-    </form>
-    <form class="add-project-form">
-      <div>
-        <label for="project">Name:</label>
-        <input type="text" id="project" name="project" required/>
-      </div>
-      <div>
-        <button id="cancel-project" type="button">Cancel</button>
-        <button type="submit">Add Project</button>
-      </div>
-    </form>
+    <div class="task-form-container">
+      <form class="add-task-form">
+        <div>
+          <label for="task">Task:</label>
+          <input type="text" id="task" name="task" required/>
+        </div>
+        <div>
+          <label for="description">Description</label>
+          <textarea name="description" id="description" cols="40" rows="5"></textarea>
+        </div>
+        <div>
+          <label for="due-date">Due Date:</label>
+          <input type="date" id="due-date" name="due-date" required/>
+          <label for="priority">Priority: </label>
+          <select name="priority" id="priority">
+            <option value="p1">Priority 1</option>
+            <option value="p2">Priority 2</option>
+            <option value="p3">Priority 3</option>
+            <option value="p4">Priority 4</option>
+          </select>
+        </div>
+        <div id="last-form-div">
+          <button id="cancel" type="button">Cancel</button>
+          <button type="submit">Add Task</button>
+        </div>
+      </form>
+    </div>
+    <div class="project-form-container">
+      <form class="add-project-form">
+        <div>
+          <label for="project">Name:</label>
+          <input type="text" id="project" name="project" required/>
+        </div>
+        <div>
+          <button id="cancel-project" type="button">Cancel</button>
+          <button type="submit">Add Project</button>
+        </div>
+      </form>
+    </div>
     <div class="container">
       <div class="sidebar">
         <div class="dashboard">

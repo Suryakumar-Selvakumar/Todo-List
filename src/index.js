@@ -2,6 +2,8 @@ import { todo } from "./todos.js";
 import { project } from "./projects.js";
 import "./style.css";
 
+const mainContent = document.querySelector(".main-content");
+
 const projectsArray = [];
 const inbox = new project("inbox");
 projectsArray.push(inbox);
@@ -10,12 +12,30 @@ projectsArray.push(inbox);
 const taskForm = document.querySelector(".add-task-form");
 const cancelTaskBtn = document.querySelector("#cancel");
 
+const taskFormContainer = document.querySelector(".task-form-container");
+
+// Event listener to make the add task form visible after clicking add task button
+const addTaskBtn = document.querySelector(".add-task-btn");
+addTaskBtn.addEventListener("click", () => {
+  taskForm.style.cssText = "visibility: visible;";
+  taskFormContainer.style.cssText = "visibility: visible;";
+  projectForm.style.cssText = "visibility: hidden;";
+});
+
+// Event listener to close the add task form upon clicking cancel
+cancelTaskBtn.addEventListener("click", () => {
+  taskForm.reset();
+  taskForm.style.cssText = "visibility: hidden";
+  taskFormContainer.style.cssText = "visibility: hidden";
+});
+
 // Event listener to submit add task form and get the formData
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
   new FormData(taskForm);
   taskForm.reset();
   taskForm.style.cssText = "visibility: hidden";
+  taskFormContainer.style.cssText = "visibility: hidden";
   console.log(taskForm);
 });
 
@@ -59,25 +79,24 @@ taskForm.addEventListener("formdata", (e) => {
   });
 });
 
-// Event listener to make the add task form visible after clicking add task button
-const addTaskBtn = document.querySelector(".add-task-btn");
-addTaskBtn.addEventListener("click", () => {
-  taskForm.style.cssText = "visibility: visible;";
-});
-
-// Event listener to close the add task form upon clicking cancel
-cancelTaskBtn.addEventListener("click", () => {
-  taskForm.reset();
-  taskForm.style.cssText = "visibility: hidden";
-});
-
 // PROJECT FORM
 const projectForm = document.querySelector(".add-project-form");
+const projectFormContainer = document.querySelector(".project-form-container");
 
 // Event listener to make the add project form visible after clicking the round + button
 const addProjectBtn = document.querySelector("#add-project-btn");
 addProjectBtn.addEventListener("click", () => {
   projectForm.style.cssText = "visibility: visible;";
+  projectFormContainer.style.cssText = "visibility: visible;";
+  taskForm.style.cssText = "visibility: hidden";
+});
+
+// Event listener to close the add project form upon clicking cancel
+const cancelProjectBtn = document.querySelector("#cancel-project");
+cancelProjectBtn.addEventListener("click", () => {
+  projectForm.reset();
+  projectForm.style.cssText = "visibility: hidden";
+  projectFormContainer.style.cssText = "visibility: hidden;";
 });
 
 // Event listener that retrieves the formdata after clicking submit
@@ -86,6 +105,7 @@ projectForm.addEventListener("submit", (event) => {
   new FormData(projectForm);
   projectForm.reset();
   projectForm.style.cssText = "visibility: hidden";
+  projectFormContainer.style.cssText = "visibility: hidden";
 });
 
 // Event listener that uses the formData to call the project constructor
@@ -105,11 +125,4 @@ projectForm.addEventListener("formdata", (e) => {
   projectOption.setAttribute("value", projectValue);
   projectOption.textContent = `${projectValue}`;
   selectProjects.appendChild(projectOption);
-});
-
-// Event listener to close the add project form upon clicking cancel
-const cancelProjectBtn = document.querySelector("#cancel-project");
-cancelProjectBtn.addEventListener("click", () => {
-  projectForm.reset();
-  projectForm.style.cssText = "visibility: hidden";
 });
