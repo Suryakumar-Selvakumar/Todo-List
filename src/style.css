@@ -32,7 +32,7 @@ body {
   display: grid;
   height: 100vh;
   width: 100vw;
-  grid-template-columns: minmax(300px, 1fr) 6fr;
+  grid-template-columns: min-content 1fr;
 }
 
 .sidebar {
@@ -44,6 +44,7 @@ body {
   gap: 7.5vh;
   min-width: 20vw;
   height: 100vh;
+  /* color: rgb(0, 150, 0) */
 }
 
 .dashboard {
@@ -140,6 +141,7 @@ body {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
+  text-transform: capitalize;
 }
 
 .project-item:hover {

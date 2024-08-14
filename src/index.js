@@ -75,6 +75,7 @@ taskForm.addEventListener("formdata", (e) => {
   projectsArray.forEach((item) => {
     if (item.projectName === projectValue) {
       item.addTodo(todoObj);
+      displayProject(projectsArray, projectValue);
     }
   });
 });
@@ -132,11 +133,20 @@ projectForm.addEventListener("formdata", (e) => {
   projectDiv.classList.add("project-item");
   projectDiv.setAttribute("data-project-name", projectValue);
   projectDiv.textContent = `${projectValue}`;
-  newProjectsContainer.appendChild(projectDiv)
+  newProjectsContainer.appendChild(projectDiv);
 });
 
+// Event listener that displays the todos of a project upon clicking its nav button.
 newProjectsContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "DIV") {
+    const dataProjectName = event.target.getAttribute("data-project-name");
+    displayProject(projectsArray, dataProjectName);
+  }
+});
+
+const navBtnsOne = document.querySelector(".nav-btns-one");
+navBtnsOne.addEventListener("click", (event) => {
+  if (event.target.tagName === "DIV" || event.target.tagName === "P") {
     const dataProjectName = event.target.getAttribute("data-project-name");
     displayProject(projectsArray, dataProjectName);
   }
