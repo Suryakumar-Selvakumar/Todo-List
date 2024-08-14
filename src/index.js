@@ -1,5 +1,6 @@
 import { todo } from "./todos.js";
 import { project } from "./projects.js";
+import displayProject from "./projectDisplay.js";
 import "./style.css";
 
 const mainContent = document.querySelector(".main-content");
@@ -76,8 +77,6 @@ taskForm.addEventListener("formdata", (e) => {
       item.addTodo(todoObj);
     }
   });
-
-  console.log(projectsArray);
 });
 
 // PROJECT FORM
@@ -132,14 +131,13 @@ projectForm.addEventListener("formdata", (e) => {
   const projectDiv = document.createElement("div");
   projectDiv.classList.add("project-item");
   projectDiv.setAttribute("data-project-name", projectValue);
-  const projectNamePara = document.createElement("p");
-  projectNamePara.textContent = `${projectValue}`;
-  projectDiv.appendChild(projectNamePara);
+  projectDiv.textContent = `${projectValue}`;
   newProjectsContainer.appendChild(projectDiv)
 });
 
 newProjectsContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "DIV") {
-    // const dataProjectName = event.target.getAttribute("data-project-name");
+    const dataProjectName = event.target.getAttribute("data-project-name");
+    displayProject(projectsArray, dataProjectName);
   }
 });
