@@ -42,12 +42,41 @@ export default function displayProject(projectsArray, dataProjectName) {
 
         const editTodoBtn = document.createElement("button");
         editTodoBtn.classList.add("edit-todo-btn");
+        editTodoBtn.setAttribute("type", "button");
+        editTodoBtn.setAttribute(
+          "data-edit-btn",
+          element.todoList.indexOf(todo)
+        );
 
         const deleteTodoBtn = document.createElement("button");
         deleteTodoBtn.classList.add("delete-todo-btn");
+        deleteTodoBtn.setAttribute("type", "button");
+        deleteTodoBtn.setAttribute(
+          "data-delete-btn",
+          element.todoList.indexOf(todo)
+        );
+
+        const completedCheckBox = document.createElement("input");
+        completedCheckBox.classList.add("completed-todo-btn");
+        completedCheckBox.setAttribute("type", "checkbox");
+        completedCheckBox.setAttribute(
+          "data-completed-btn",
+          element.todoList.indexOf(todo)
+        );
+        if (todo.completedStatus === true) {
+          completedCheckBox.checked = true;
+        } else if (todo.completedStatus === false) {
+          completedCheckBox.checked = false;
+        }
 
         const todoExtension = document.createElement("div");
-        todoExtension.append(descriptionPara, editTodoBtn, deleteTodoBtn);
+        todoExtension.classList.add("todo-extension-div");
+        todoExtension.append(
+          descriptionPara,
+          completedCheckBox,
+          editTodoBtn,
+          deleteTodoBtn
+        );
 
         todoDiv.append(todoFirstRow, dueDatePara, todoExtension);
         projectDiv.appendChild(todoDiv);

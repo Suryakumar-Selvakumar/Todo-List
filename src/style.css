@@ -243,3 +243,7 @@ textarea {
   background-position: center;
   cursor: pointer;
 }
+
+.todo-extension-div {
+  display: none;
+}
