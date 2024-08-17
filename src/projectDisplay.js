@@ -23,18 +23,7 @@ export default function displayProject(projectsArray, dataProjectName) {
         titlePara.style.cssText = "font-size: 2rem;";
         descriptionPara.textContent = `${todo.description}`;
         descriptionPara.classList.add("description-para");
-        // descriptionPara.style.cssText = "justify-self: flex-start;"
         dueDatePara.textContent = `${todo.dueDate}`;
-
-        if (todo.priority === "p1") {
-          todoDiv.style.cssText = "box-shadow: inset 1rem 0rem rgb(200, 0, 0);";
-        } else if (todo.priority === "p2") {
-          todoDiv.style.cssText = "box-shadow: inset 1rem 0 rgb(255, 187, 0);";
-        } else if (todo.priority === "p3") {
-          todoDiv.style.cssText = "box-shadow: inset 1rem 0 rgb(0, 150, 0);";
-        } else {
-          todoDiv.style.cssText = "box-shadow: inset 1rem 0 gray;";
-        }
 
         const todoFirstRow = document.createElement("div");
         todoFirstRow.classList.add("todo-first-row");
@@ -70,10 +59,25 @@ export default function displayProject(projectsArray, dataProjectName) {
           "data-completed-btn",
           element.todoList.indexOf(todo)
         );
+        completedCheckBox.setAttribute(
+          "data-project-name",
+          element.projectName
+        );
         if (todo.completedStatus === true) {
           completedCheckBox.checked = true;
+          todoDiv.style.cssText = "text-decoration: line-through;";
         } else if (todo.completedStatus === false) {
           completedCheckBox.checked = false;
+        }
+
+        if (todo.priority === "p1") {
+          todoDiv.style.cssText += "box-shadow: inset 1rem 0rem rgb(200, 0, 0);";
+        } else if (todo.priority === "p2") {
+          todoDiv.style.cssText += "box-shadow: inset 1rem 0 rgb(255, 187, 0);";
+        } else if (todo.priority === "p3") {
+          todoDiv.style.cssText += "box-shadow: inset 1rem 0 rgb(0, 150, 0);";
+        } else {
+          todoDiv.style.cssText += "box-shadow: inset 1rem 0 gray;";
         }
 
         const buttonsDiv = document.createElement("div");

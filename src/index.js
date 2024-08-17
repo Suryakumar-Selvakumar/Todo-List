@@ -76,13 +76,12 @@ taskForm.addEventListener("formdata", (e) => {
   //   Code to push todo into the currently selected project
   projectsArray.forEach((item) => {
     if (item.projectName === projectValue) {
-      if(dataIndex) {
+      if (dataIndex) {
         item.addTodo(todoObj, dataIndex);
         dataIndex = null;
-      } else if(dataIndex === 0) {
+      } else if (dataIndex === 0) {
         item.addTodo(todoObj, 0);
-      } 
-      else {
+      } else {
         item.addTodo(todoObj);
       }
       displayProject(projectsArray, projectValue);
@@ -197,6 +196,7 @@ mainContent.addEventListener("mouseout", (event) => {
 let expandStatus = false;
 mainContent.addEventListener("click", (event) => {
   if (event.target.classList.contains("expand-btn")) {
+    console.log(expandStatus);
     for (const child of event.target.parentElement.children) {
       if (child.classList.contains("todo-extension-div")) {
         if (expandStatus === false) {
@@ -223,17 +223,29 @@ mainContent.addEventListener("click", (event) => {
     const dataDeleteBtn = event.target.getAttribute("data-delete-btn");
     const dataProjectName = event.target.getAttribute("data-project-name");
     projectsArray.forEach((item) => {
-      item.deleteTodo(dataDeleteBtn);
+      if (item.projectName === dataProjectName) {
+        item.deleteTodo(dataDeleteBtn);
+      }
       displayProject(projectsArray, dataProjectName);
     });
   }
 
   if (event.target.classList.contains("completed-todo-btn")) {
-    const dataDeleteBtn = event.target.getAttribute("data-completed-btn");
+    const index = event.target.getAttribute("data-completed-btn");
     const dataProjectName = event.target.getAttribute("data-project-name");
     projectsArray.forEach((item) => {
-      item.deleteTodo(dataDeleteBtn);
+      if (item.projectName === dataProjectName) {
+        if (
+          event.target.checked &&
+          item.todoList[index].completedStatus === false
+        ) {
+          item.todoList[index].completedStatus = true;
+        } else if (item.todoList[index].completedStatus === true) {
+          item.todoList[index].completedStatus = false;
+        }
+      }
       displayProject(projectsArray, dataProjectName);
     });
+    expandStatus = false;
   }
 });
