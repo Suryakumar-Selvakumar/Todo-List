@@ -105,8 +105,8 @@ projectForm.addEventListener("submit", (event) => {
   event.preventDefault();
   new FormData(projectForm);
   projectForm.reset();
-  projectForm.style.cssText = "visibility: hidden";
-  projectFormContainer.style.cssText = "visibility: hidden";
+  projectForm.style.cssText = "visibility: hidden;";
+  projectFormContainer.style.cssText = "visibility: hidden;";
 });
 
 // Event listener that uses the formData to call the project constructor
@@ -153,10 +153,46 @@ navBtnsOne.addEventListener("click", (event) => {
   }
 });
 
+// Event listener to display the expand button on mouseover
+mainContent.addEventListener("mouseover", (event) => {
+  if (event.target.classList.contains("todo-div")) {
+    for (const child of event.target.children) {
+      if (child.classList.contains("expand-btn")) {
+        child.style.cssText = "visibility: visible;";
+      }
+    }
+  }
+
+  if (event.target.classList.contains("expand-btn")) {
+    event.target.style.cssText = "visibility: visible;";
+  }
+});
+
+// Event listener to hide the expand button on mouse out
+mainContent.addEventListener("mouseout", (event) => {
+  if (event.target.classList.contains("todo-div")) {
+    for (const child of event.target.children) {
+      if (child.classList.contains("expand-btn")) {
+        child.style.cssText = "visibility: hidden";
+      }
+    }
+  }
+});
+
+// Event listener for the expand button to show the additional details of the task
+let expandStatus =  false;
 mainContent.addEventListener("click", (event) => {
-  if (event.target.tagName === "BUTTON") {
-
-      // event.target.nextElementSibling.style.cssText = "display: flex;";
-
+  if (event.target.classList.contains("expand-btn")) {
+    for (const child of event.target.parentElement.children) {
+      if (child.classList.contains("todo-extension-div")) {
+        if(expandStatus === false) {
+          child.style.cssText = "display: flex;";
+          expandStatus = true;
+        } else {
+          child.style.cssText = "display: none;"
+          expandStatus = false;
+        }
+      }
+    }
   }
 });

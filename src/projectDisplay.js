@@ -22,6 +22,8 @@ export default function displayProject(projectsArray, dataProjectName) {
         titlePara.textContent = `${todo.title}`;
         titlePara.style.cssText = "font-size: 2rem;";
         descriptionPara.textContent = `${todo.description}`;
+        descriptionPara.classList.add("description-para");
+        // descriptionPara.style.cssText = "justify-self: flex-start;"
         dueDatePara.textContent = `${todo.dueDate}`;
 
         if (todo.priority === "p1") {
@@ -37,6 +39,12 @@ export default function displayProject(projectsArray, dataProjectName) {
         const todoFirstRow = document.createElement("div");
         todoFirstRow.classList.add("todo-first-row");
         todoFirstRow.append(titlePara, dueDatePara);
+
+        const expandBtn = document.createElement("button");
+        expandBtn.setAttribute("data-btn", element.todoList.indexOf(todo));
+        expandBtn.setAttribute("type", "button");
+        expandBtn.classList.add("expand-btn");
+        expandBtn.style.cssText = "visibility: hidden;";
 
         const editTodoBtn = document.createElement("button");
         editTodoBtn.classList.add("edit-todo-btn");
@@ -67,18 +75,20 @@ export default function displayProject(projectsArray, dataProjectName) {
           completedCheckBox.checked = false;
         }
 
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.classList.add("buttons-div");
+        buttonsDiv.append(completedCheckBox, editTodoBtn, deleteTodoBtn);
+
         const todoExtension = document.createElement("div");
         todoExtension.classList.add("todo-extension-div");
-        todoExtension.setAttribute("data-extension-index", element.todoList.indexOf(todo));
-        todoExtension.style.cssText = "display: none;";
-        todoExtension.append(
-          descriptionPara,
-          completedCheckBox,
-          editTodoBtn,
-          deleteTodoBtn
+        todoExtension.setAttribute(
+          "data-extension-index",
+          element.todoList.indexOf(todo)
         );
+        todoExtension.style.cssText = "display: none;";
+        todoExtension.append(descriptionPara, buttonsDiv);
 
-        todoDiv.append(todoFirstRow, todoExtension);
+        todoDiv.append(todoFirstRow, todoExtension, expandBtn);
         projectDiv.appendChild(todoDiv);
       });
       mainContent.appendChild(projectDiv);

@@ -217,11 +217,9 @@ textarea {
   padding: 1rem;
   padding-left: 2rem;
   border: 1px solid black;
-}
-
-.todo-div:hover {
-  cursor: pointer;
-  background-color: rgb(234, 233, 233);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .add-project-form {
@@ -235,14 +233,31 @@ textarea {
   box-shadow: 3px 4px 15px 1px rgba(98, 93, 93, 1);
 }
 
+.expand-btn {
+  align-self: flex-end;
+  background-color: rgb(212, 211, 211);
+  border: none;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  background-image: url("/src/menu-down-outline.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  position: relative;
+  top: 5px;
+  left: 5px;
+}
+
 .delete-todo-btn {
   background-color: rgb(241, 41, 41);
   border: none;
   border-radius: 3px;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   background-image: url("/src/delete-outline.svg");
-  background-size: 30px;
+  background-size: 20px;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
@@ -252,10 +267,10 @@ textarea {
   background-color: rgb(18, 180, 244);
   border: none;
   border-radius: 3px;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   background-image: url("/src/pencil-plus-outline.svg");
-  background-size: 30px;
+  background-size: 20px;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
@@ -265,4 +280,20 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.todo-extension-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons-div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.description-para {
+  justify-self: center;
 }
