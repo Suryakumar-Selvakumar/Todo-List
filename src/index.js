@@ -144,10 +144,20 @@ newProjectsContainer.addEventListener("click", (event) => {
   }
 });
 
+// Event listener to display the inbox and its todos in the main-content area upon clicking its nav item.
 const navBtnsOne = document.querySelector(".nav-btns-one");
 navBtnsOne.addEventListener("click", (event) => {
   if (event.target.tagName === "DIV" || event.target.tagName === "P") {
     const dataProjectName = event.target.getAttribute("data-project-name");
     displayProject(projectsArray, dataProjectName);
+  }
+});
+
+const projectDiv = document.querySelector(".main-content");
+projectDiv.addEventListener("click", (event) => {
+  if (event.target.classList.contains("todo-div", "todo-extension-div")) {
+    const dataTodoIndex = event.target.getAttribute("data-index");
+    console.log(dataTodoIndex)
+    document.querySelector(".todo-extension-div").style.cssText = "display: flex;"
   }
 });

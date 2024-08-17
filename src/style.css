@@ -207,6 +207,17 @@ textarea {
   visibility: hidden;
 }
 
+.project-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.todo-div:hover {
+  cursor: pointer;
+  background-color: rgb(234, 233, 233);
+}
+
 .add-project-form {
   display: flex;
   flex-direction: column;
@@ -244,6 +255,8 @@ textarea {
   cursor: pointer;
 }
 
-.todo-extension-div {
-  display: none;
+.todo-first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -1,6 +1,7 @@
 export default function displayProject(projectsArray, dataProjectName) {
   const mainContent = document.querySelector(".main-content");
   const projectDiv = document.createElement("div");
+  projectDiv.classList.add("project-div");
   const projectHeader = document.createElement("h1");
 
   projectsArray.forEach((element) => {
@@ -19,6 +20,7 @@ export default function displayProject(projectsArray, dataProjectName) {
         const dueDatePara = document.createElement("p");
 
         titlePara.textContent = `${todo.title}`;
+        titlePara.style.cssText = "font-size: 2rem;"
         descriptionPara.textContent = `${todo.description}`;
         dueDatePara.textContent = `${todo.dueDate}`;
 
@@ -37,8 +39,9 @@ export default function displayProject(projectsArray, dataProjectName) {
             "width:50px; height:10px; background-color: gray; border-radius: 7.5px;";
         }
 
-        const todoFirstRow = document.createElement("div");
-        todoFirstRow.append(titlePara, priorityDiv);
+        // const todoFirstRow = document.createElement("div");
+        // todoFirstRow.classList.add("todo-first-row");
+        // todoFirstRow.append(titlePara, priorityDiv);
 
         const editTodoBtn = document.createElement("button");
         editTodoBtn.classList.add("edit-todo-btn");
@@ -71,6 +74,7 @@ export default function displayProject(projectsArray, dataProjectName) {
 
         const todoExtension = document.createElement("div");
         todoExtension.classList.add("todo-extension-div");
+        todoExtension.style.cssText = "display: none;"
         todoExtension.append(
           descriptionPara,
           completedCheckBox,
@@ -78,12 +82,10 @@ export default function displayProject(projectsArray, dataProjectName) {
           deleteTodoBtn
         );
 
-        todoDiv.append(todoFirstRow, dueDatePara, todoExtension);
+        todoDiv.append(titlePara, priorityDiv, dueDatePara, todoExtension);
         projectDiv.appendChild(todoDiv);
       });
       mainContent.appendChild(projectDiv);
-      projectDiv.style.cssText =
-        "display: flex; flex-direction: column; gap: 1rem;";
     }
   });
 }
