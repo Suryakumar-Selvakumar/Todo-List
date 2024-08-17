@@ -1,6 +1,7 @@
 import { todo } from "./todos.js";
 import { project } from "./projects.js";
 import displayProject from "./projectDisplay.js";
+// import { isToday } from "date-fns";
 import "./style.css";
 
 const mainContent = document.querySelector(".main-content");
@@ -153,15 +154,6 @@ newProjectsContainer.addEventListener("click", (event) => {
   }
 });
 
-// Event listener to display the inbox and its todos in the main-content area upon clicking its nav item.
-const navBtnsOne = document.querySelector(".nav-btns-one");
-navBtnsOne.addEventListener("click", (event) => {
-  if (event.target.tagName === "DIV" || event.target.tagName === "P") {
-    const dataProjectName = event.target.getAttribute("data-project-name");
-    displayProject(projectsArray, dataProjectName);
-  }
-});
-
 // Event listener to display the expand button on mouseover
 mainContent.addEventListener("mouseover", (event) => {
   if (event.target.classList.contains("todo-div")) {
@@ -192,7 +184,7 @@ mainContent.addEventListener("mouseout", (event) => {
   }
 });
 
-// Event listener for the expand button to show the additional details of the task, 
+// Event listener for the expand button to show the additional details of the task,
 // edit & delete the task and change it's completion status
 let expandStatus = false;
 mainContent.addEventListener("click", (event) => {
@@ -259,4 +251,35 @@ dueDate.addEventListener("focus", () => {
   var yyyy = today.getFullYear();
   today = yyyy + "-" + mm + "-" + dd;
   document.getElementById("due-date").setAttribute("min", today);
+});
+
+const dateProjectsArray = [];
+const todayProj = new project("today");
+const upcomingProj = new project("upcoming");
+dateProjectsArray.push(todayProj, upcomingProj);
+
+// Event listener to display the inbox, today and upcoming and its todos in the main-content area upon clicking their respective nav item.
+const navBtnsOne = document.querySelector(".nav-btns-one");
+navBtnsOne.addEventListener("click", (event) => {
+  if (event.target.classList.contains("inbox")) {
+    const dataProjectName = event.target.getAttribute("data-project-name");
+    displayProject(projectsArray, dataProjectName);
+  }
+
+  if (event.target.classList.contains("today")) {
+    todayProj.todoList = [];
+    let today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+    projectsArray.forEach((proj) => {
+      proj.todoList.forEach((item) => {
+        if (item.dueDate == today) {
+          todayProj.addTodo(item);
+        }
+      });
+    });
+    displayProject(dateProjectsArray, "today");
+  }
 });
