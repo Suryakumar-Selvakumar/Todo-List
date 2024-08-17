@@ -60,6 +60,10 @@ export default function displayProject(projectsArray, dataProjectName) {
         deleteTodoBtn.setAttribute("data-project-name", element.projectName);
 
         // Completed checkbox to set the completedStatus of a task
+        const completedStatusLabel = document.createElement("label");
+        completedStatusLabel.classList.add("switch");
+        const slider = document.createElement("span");
+        slider.classList.add("slider");
         const completedCheckBox = document.createElement("input");
         completedCheckBox.classList.add("completed-todo-btn");
         completedCheckBox.setAttribute("type", "checkbox");
@@ -77,6 +81,7 @@ export default function displayProject(projectsArray, dataProjectName) {
         } else if (todo.completedStatus === false) {
           completedCheckBox.checked = false;
         }
+        completedStatusLabel.append(completedCheckBox, slider);
 
         // Setting box-shadow inset in different colors based on priority
         if (todo.priority === "p1") {
@@ -93,7 +98,7 @@ export default function displayProject(projectsArray, dataProjectName) {
         // Adding all the buttons to a button div
         const buttonsDiv = document.createElement("div");
         buttonsDiv.classList.add("buttons-div");
-        buttonsDiv.append(completedCheckBox, editTodoBtn, deleteTodoBtn);
+        buttonsDiv.append(completedStatusLabel, editTodoBtn, deleteTodoBtn);
 
         // Adding the hidden details to todoExtension
         const todoExtension = document.createElement("div");
