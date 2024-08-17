@@ -4,6 +4,7 @@ export default function displayProject(projectsArray, dataProjectName) {
   projectDiv.classList.add("project-div");
   const projectHeader = document.createElement("h1");
 
+  // Iterating through the projectsArray and creating it's main-content page if the projectName matches
   projectsArray.forEach((element) => {
     if (element.projectName === dataProjectName) {
       mainContent.innerHTML = "";
@@ -11,6 +12,8 @@ export default function displayProject(projectsArray, dataProjectName) {
       projectHeader.style.cssText =
         "text-align: center; text-transform: capitalize;";
       projectDiv.appendChild(projectHeader);
+
+      // Iterating through the todolist of the project and displaying all the todos
       element.todoList.forEach((todo) => {
         const todoDiv = document.createElement("div");
         todoDiv.classList.add("todo-div");
@@ -25,16 +28,19 @@ export default function displayProject(projectsArray, dataProjectName) {
         descriptionPara.classList.add("description-para");
         dueDatePara.textContent = `${todo.dueDate}`;
 
+        // First row contains the title and dueDate paras
         const todoFirstRow = document.createElement("div");
         todoFirstRow.classList.add("todo-first-row");
         todoFirstRow.append(titlePara, dueDatePara);
 
+        // Expand button will be used to display the description para and other task buttons
         const expandBtn = document.createElement("button");
         expandBtn.setAttribute("data-btn", element.todoList.indexOf(todo));
         expandBtn.setAttribute("type", "button");
         expandBtn.classList.add("expand-btn");
         expandBtn.style.cssText = "visibility: hidden;";
 
+        // Edit button to edit the details of the task
         const editTodoBtn = document.createElement("button");
         editTodoBtn.classList.add("edit-todo-btn");
         editTodoBtn.setAttribute("type", "button");
@@ -43,6 +49,7 @@ export default function displayProject(projectsArray, dataProjectName) {
           element.todoList.indexOf(todo)
         );
 
+        // Delete button to delete the task
         const deleteTodoBtn = document.createElement("button");
         deleteTodoBtn.classList.add("delete-todo-btn");
         deleteTodoBtn.setAttribute("type", "button");
@@ -52,6 +59,7 @@ export default function displayProject(projectsArray, dataProjectName) {
         );
         deleteTodoBtn.setAttribute("data-project-name", element.projectName);
 
+        // Completed checkbox to set the completedStatus of a task
         const completedCheckBox = document.createElement("input");
         completedCheckBox.classList.add("completed-todo-btn");
         completedCheckBox.setAttribute("type", "checkbox");
@@ -70,8 +78,10 @@ export default function displayProject(projectsArray, dataProjectName) {
           completedCheckBox.checked = false;
         }
 
+        // Setting box-shadow inset in different colors based on priority
         if (todo.priority === "p1") {
-          todoDiv.style.cssText += "box-shadow: inset 1rem 0rem rgb(200, 0, 0);";
+          todoDiv.style.cssText +=
+            "box-shadow: inset 1rem 0rem rgb(200, 0, 0);";
         } else if (todo.priority === "p2") {
           todoDiv.style.cssText += "box-shadow: inset 1rem 0 rgb(255, 187, 0);";
         } else if (todo.priority === "p3") {
@@ -80,10 +90,12 @@ export default function displayProject(projectsArray, dataProjectName) {
           todoDiv.style.cssText += "box-shadow: inset 1rem 0 gray;";
         }
 
+        // Adding all the buttons to a button div
         const buttonsDiv = document.createElement("div");
         buttonsDiv.classList.add("buttons-div");
         buttonsDiv.append(completedCheckBox, editTodoBtn, deleteTodoBtn);
 
+        // Adding the hidden details to todoExtension
         const todoExtension = document.createElement("div");
         todoExtension.classList.add("todo-extension-div");
         todoExtension.setAttribute(
@@ -93,6 +105,7 @@ export default function displayProject(projectsArray, dataProjectName) {
         todoExtension.style.cssText = "display: none;";
         todoExtension.append(descriptionPara, buttonsDiv);
 
+        // Adding everything to todoDiv and that to projectDiv and then to mainContent
         todoDiv.append(todoFirstRow, todoExtension, expandBtn);
         projectDiv.appendChild(todoDiv);
       });

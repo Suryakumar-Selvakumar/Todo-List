@@ -192,11 +192,11 @@ mainContent.addEventListener("mouseout", (event) => {
   }
 });
 
-// Event listener for the expand button to show the additional details of the task
+// Event listener for the expand button to show the additional details of the task, 
+// edit & delete the task and change it's completion status
 let expandStatus = false;
 mainContent.addEventListener("click", (event) => {
   if (event.target.classList.contains("expand-btn")) {
-    console.log(expandStatus);
     for (const child of event.target.parentElement.children) {
       if (child.classList.contains("todo-extension-div")) {
         if (expandStatus === false) {
@@ -248,4 +248,15 @@ mainContent.addEventListener("click", (event) => {
     });
     expandStatus = false;
   }
+});
+
+// Event listener to set the minimum date as today for the date input
+const dueDate = document.getElementById("due-date");
+dueDate.addEventListener("focus", () => {
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  var yyyy = today.getFullYear();
+  today = yyyy + "-" + mm + "-" + dd;
+  document.getElementById("due-date").setAttribute("min", today);
 });
