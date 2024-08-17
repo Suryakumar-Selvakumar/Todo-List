@@ -1,7 +1,6 @@
 import { todo } from "./todos.js";
 import { project } from "./projects.js";
 import displayProject from "./projectDisplay.js";
-// import { isToday } from "date-fns";
 import "./style.css";
 
 const mainContent = document.querySelector(".main-content");
@@ -281,5 +280,22 @@ navBtnsOne.addEventListener("click", (event) => {
       });
     });
     displayProject(dateProjectsArray, "today");
+  }
+
+  if (event.target.classList.contains("upcoming")) {
+    upcomingProj.todoList = [];
+    let today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+    projectsArray.forEach((proj) => {
+      proj.todoList.forEach((item) => {
+        if (item.dueDate > today) {
+          upcomingProj.addTodo(item);
+        }
+      });
+    });
+    displayProject(dateProjectsArray, "upcoming");
   }
 });
