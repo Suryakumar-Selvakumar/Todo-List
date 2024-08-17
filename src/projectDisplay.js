@@ -61,6 +61,7 @@ export default function displayProject(projectsArray, dataProjectName) {
           "data-delete-btn",
           element.todoList.indexOf(todo)
         );
+        deleteTodoBtn.setAttribute("data-project-name", element.projectName);
 
         const completedCheckBox = document.createElement("input");
         completedCheckBox.classList.add("completed-todo-btn");

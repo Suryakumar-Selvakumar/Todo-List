@@ -9,6 +9,8 @@ const projectsArray = [];
 const inbox = new project("inbox");
 projectsArray.push(inbox);
 
+let dataIndex;
+
 // TASK FORM
 const taskForm = document.querySelector(".add-task-form");
 const cancelTaskBtn = document.querySelector("#cancel");
@@ -74,7 +76,15 @@ taskForm.addEventListener("formdata", (e) => {
   //   Code to push todo into the currently selected project
   projectsArray.forEach((item) => {
     if (item.projectName === projectValue) {
-      item.addTodo(todoObj);
+      if(dataIndex) {
+        item.addTodo(todoObj, dataIndex);
+        dataIndex = null;
+      } else if(dataIndex === 0) {
+        item.addTodo(todoObj, 0);
+      } 
+      else {
+        item.addTodo(todoObj);
+      }
       displayProject(projectsArray, projectValue);
     }
   });
@@ -177,22 +187,53 @@ mainContent.addEventListener("mouseout", (event) => {
       }
     }
   }
+
+  if (event.target.classList.contains("expand-btn")) {
+    event.target.style.cssText = "visibility: hidden;";
+  }
 });
 
 // Event listener for the expand button to show the additional details of the task
-let expandStatus =  false;
+let expandStatus = false;
 mainContent.addEventListener("click", (event) => {
   if (event.target.classList.contains("expand-btn")) {
     for (const child of event.target.parentElement.children) {
       if (child.classList.contains("todo-extension-div")) {
-        if(expandStatus === false) {
+        if (expandStatus === false) {
           child.style.cssText = "display: flex;";
           expandStatus = true;
         } else {
-          child.style.cssText = "display: none;"
+          child.style.cssText = "display: none;";
           expandStatus = false;
         }
       }
     }
+  }
+
+  if (event.target.classList.contains("edit-todo-btn")) {
+    taskForm.style.cssText = "visibility: visible;";
+    taskFormContainer.style.cssText = "visibility: visible;";
+    projectForm.style.cssText = "visibility: hidden;";
+
+    const dataEditBtn = event.target.getAttribute("data-edit-btn");
+    dataIndex = dataEditBtn;
+  }
+
+  if (event.target.classList.contains("delete-todo-btn")) {
+    const dataDeleteBtn = event.target.getAttribute("data-delete-btn");
+    const dataProjectName = event.target.getAttribute("data-project-name");
+    projectsArray.forEach((item) => {
+      item.deleteTodo(dataDeleteBtn);
+      displayProject(projectsArray, dataProjectName);
+    });
+  }
+
+  if (event.target.classList.contains("completed-todo-btn")) {
+    const dataDeleteBtn = event.target.getAttribute("data-completed-btn");
+    const dataProjectName = event.target.getAttribute("data-project-name");
+    projectsArray.forEach((item) => {
+      item.deleteTodo(dataDeleteBtn);
+      displayProject(projectsArray, dataProjectName);
+    });
   }
 });

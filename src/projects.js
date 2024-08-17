@@ -6,8 +6,17 @@ class project {
   }
 
   // Adds a todo object to the todoList array
-  addTodo(todoItem) {
-    this.todoList.push(todoItem);
+  addTodo(todoItem, index) {
+    if (index) {
+      this.todoList.splice(index, 1, todoItem);
+    } else {
+      this.todoList.push(todoItem);
+    }
+  }
+
+  // Deletes a todo object from the todoList array
+  deleteTodo(index) {
+    this.todoList.splice(index, 1);
   }
 }
 
