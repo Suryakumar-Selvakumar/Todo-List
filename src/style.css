@@ -213,6 +213,12 @@ textarea {
   gap: 1rem;
 }
 
+.todo-div {
+  padding: 1rem;
+  padding-left: 2rem;
+  border: 1px solid black;
+}
+
 .todo-div:hover {
   cursor: pointer;
   background-color: rgb(234, 233, 233);

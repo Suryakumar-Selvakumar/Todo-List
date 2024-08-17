@@ -20,28 +20,23 @@ export default function displayProject(projectsArray, dataProjectName) {
         const dueDatePara = document.createElement("p");
 
         titlePara.textContent = `${todo.title}`;
-        titlePara.style.cssText = "font-size: 2rem;"
+        titlePara.style.cssText = "font-size: 2rem;";
         descriptionPara.textContent = `${todo.description}`;
         dueDatePara.textContent = `${todo.dueDate}`;
 
-        const priorityDiv = document.createElement("div");
         if (todo.priority === "p1") {
-          priorityDiv.style.cssText =
-            "width:50px; height:10px; background-color: rgb(200, 0, 0); border-radius: 7.5px;";
+          todoDiv.style.cssText = "box-shadow: inset 1rem 0rem rgb(200, 0, 0);";
         } else if (todo.priority === "p2") {
-          priorityDiv.style.cssText =
-            "width:50px; height:10px; background-color: rgb(255, 187, 0); border-radius: 7.5px;";
+          todoDiv.style.cssText = "box-shadow: inset 1rem 0 rgb(255, 187, 0);";
         } else if (todo.priority === "p3") {
-          priorityDiv.style.cssText =
-            "width:50px; height:10px; background-color: rgb(0, 150, 0); border-radius: 7.5px;";
+          todoDiv.style.cssText = "box-shadow: inset 1rem 0 rgb(0, 150, 0);";
         } else {
-          priorityDiv.style.cssText =
-            "width:50px; height:10px; background-color: gray; border-radius: 7.5px;";
+          todoDiv.style.cssText = "box-shadow: inset 1rem 0 gray;";
         }
 
-        // const todoFirstRow = document.createElement("div");
-        // todoFirstRow.classList.add("todo-first-row");
-        // todoFirstRow.append(titlePara, priorityDiv);
+        const todoFirstRow = document.createElement("div");
+        todoFirstRow.classList.add("todo-first-row");
+        todoFirstRow.append(titlePara, dueDatePara);
 
         const editTodoBtn = document.createElement("button");
         editTodoBtn.classList.add("edit-todo-btn");
@@ -74,7 +69,8 @@ export default function displayProject(projectsArray, dataProjectName) {
 
         const todoExtension = document.createElement("div");
         todoExtension.classList.add("todo-extension-div");
-        todoExtension.style.cssText = "display: none;"
+        todoExtension.setAttribute("data-extension-index", element.todoList.indexOf(todo));
+        todoExtension.style.cssText = "display: none;";
         todoExtension.append(
           descriptionPara,
           completedCheckBox,
@@ -82,7 +78,7 @@ export default function displayProject(projectsArray, dataProjectName) {
           deleteTodoBtn
         );
 
-        todoDiv.append(titlePara, priorityDiv, dueDatePara, todoExtension);
+        todoDiv.append(todoFirstRow, todoExtension);
         projectDiv.appendChild(todoDiv);
       });
       mainContent.appendChild(projectDiv);

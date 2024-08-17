@@ -129,11 +129,11 @@ projectForm.addEventListener("formdata", (e) => {
   selectProjects.appendChild(projectOption);
 
   // Add newly created projects as nav-items under myProjects
-  const projectDiv = document.createElement("div");
-  projectDiv.classList.add("project-item");
-  projectDiv.setAttribute("data-project-name", projectValue);
-  projectDiv.textContent = `${projectValue}`;
-  newProjectsContainer.appendChild(projectDiv);
+  const projectNavDiv = document.createElement("div");
+  projectNavDiv.classList.add("project-item");
+  projectNavDiv.setAttribute("data-project-name", projectValue);
+  projectNavDiv.textContent = `${projectValue}`;
+  newProjectsContainer.appendChild(projectNavDiv);
 });
 
 // Event listener that displays the todos of a project upon clicking its nav button.
@@ -153,11 +153,10 @@ navBtnsOne.addEventListener("click", (event) => {
   }
 });
 
-const projectDiv = document.querySelector(".main-content");
-projectDiv.addEventListener("click", (event) => {
-  if (event.target.classList.contains("todo-div", "todo-extension-div")) {
-    const dataTodoIndex = event.target.getAttribute("data-index");
-    console.log(dataTodoIndex)
-    document.querySelector(".todo-extension-div").style.cssText = "display: flex;"
+mainContent.addEventListener("click", (event) => {
+  if (event.target.tagName === "BUTTON") {
+
+      // event.target.nextElementSibling.style.cssText = "display: flex;";
+
   }
 });
