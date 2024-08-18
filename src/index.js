@@ -142,6 +142,10 @@ projectForm.addEventListener("formdata", (e) => {
   projectNavDiv.classList.add("project-item");
   projectNavDiv.setAttribute("data-project-name", projectValue);
   projectNavDiv.textContent = `${projectValue}`;
+  const deleteProjectBtn = document.createElement("button");
+  deleteProjectBtn.classList.add("delete-project-btn");
+  deleteProjectBtn.setAttribute("data-project-name", projectValue);
+  projectNavDiv.appendChild(deleteProjectBtn);
   newProjectsContainer.appendChild(projectNavDiv);
 });
 
@@ -150,6 +154,21 @@ newProjectsContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "DIV") {
     const dataProjectName = event.target.getAttribute("data-project-name");
     displayProject(projectsArray, dataProjectName);
+  }
+});
+
+newProjectsContainer.addEventListener("click", (event) => {
+  if (event.target.tagName === "BUTTON") {
+    const dataProjectName = event.target.getAttribute("data-project-name");
+    projectsArray.forEach(proj => {
+      if(proj.projectName === dataProjectName) {
+        projectsArray.splice(projectsArray.indexOf(proj), 1);
+        if(event.target.parentElement.getAttribute("data-project-name") === dataProjectName) {
+          event.target.parentElement.innerHTML = "";
+          mainContent.innerHTML = "";
+        }
+      }
+    })
   }
 });
 
