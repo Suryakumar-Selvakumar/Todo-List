@@ -2,6 +2,7 @@ import { todo } from "./todos.js";
 import { project } from "./projects.js";
 import displayProject from "./projectDisplay.js";
 import "./style.css";
+import { populateStorage, retrieveStorage } from "./localStorageModule.js";
 
 const mainContent = document.querySelector(".main-content");
 
@@ -160,15 +161,18 @@ newProjectsContainer.addEventListener("click", (event) => {
 newProjectsContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "BUTTON") {
     const dataProjectName = event.target.getAttribute("data-project-name");
-    projectsArray.forEach(proj => {
-      if(proj.projectName === dataProjectName) {
+    projectsArray.forEach((proj) => {
+      if (proj.projectName === dataProjectName) {
         projectsArray.splice(projectsArray.indexOf(proj), 1);
-        if(event.target.parentElement.getAttribute("data-project-name") === dataProjectName) {
+        if (
+          event.target.parentElement.getAttribute("data-project-name") ===
+          dataProjectName
+        ) {
           event.target.parentElement.innerHTML = "";
           mainContent.innerHTML = "";
         }
       }
-    })
+    });
   }
 });
 
