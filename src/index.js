@@ -1,14 +1,58 @@
 import { todo } from "./todos.js";
 import { project } from "./projects.js";
-import displayProject from "./projectDisplay.js";
+import displayProject from "./displayProject.js";
 import "./style.css";
-import { populateStorage, retrieveStorage } from "./localStorageModule.js";
+import {
+  storeProjectsArray,
+  retrieveProjectsArray,
+  storeDateProjectsArray,
+  retrieveDateProjectsArray,
+} from "./localStorageModule.js";
+
+// localStorage.clear();
 
 const mainContent = document.querySelector(".main-content");
 
-const projectsArray = [];
+let projectsArray = [];
 const inbox = new project("inbox");
 projectsArray.push(inbox);
+
+let dateProjectsArray = [];
+const todayProj = new project("today");
+const upcomingProj = new project("upcoming");
+dateProjectsArray.push(todayProj, upcomingProj);
+
+// Event listener to display the existing local Storage date upon page load/reload
+document.addEventListener("DOMContentLoaded", (event) => {
+  const lSProjectsArray = retrieveProjectsArray();
+
+  lSProjectsArray.forEach((proj) => {
+    projectsArray.forEach((item) => {
+      if (item.projectName === proj.projectName) {
+        item.todoList = [...proj.todoList];
+      } else {
+        const newProject = new project(proj.projectName);
+        newProject.todoList = [...proj.todoList];
+        projectsArray.push(newProject);
+
+        const projectNavDiv = document.createElement("div");
+        projectNavDiv.classList.add("project-item");
+        projectNavDiv.setAttribute("data-project-name", proj.projectName);
+        projectNavDiv.textContent = `${proj.projectName}`;
+        const deleteProjectBtn = document.createElement("button");
+        deleteProjectBtn.classList.add("delete-project-btn");
+        deleteProjectBtn.setAttribute("data-project-name", proj.projectName);
+        projectNavDiv.appendChild(deleteProjectBtn);
+        newProjectsContainer.appendChild(projectNavDiv);
+
+        const projectOption = document.createElement("option");
+        projectOption.setAttribute("value", proj.projectName);
+        projectOption.textContent = `${proj.projectName}`;
+        selectProjects.appendChild(projectOption);
+      }
+    });
+  });
+});
 
 let dataIndex;
 
@@ -85,7 +129,9 @@ taskForm.addEventListener("formdata", (e) => {
       } else {
         item.addTodo(todoObj);
       }
-      displayProject(projectsArray, projectValue);
+      storeProjectsArray(projectsArray);
+      const lSProjectsArray = retrieveProjectsArray();
+      displayProject(lSProjectsArray, projectValue);
     }
   });
 });
@@ -150,26 +196,34 @@ projectForm.addEventListener("formdata", (e) => {
   newProjectsContainer.appendChild(projectNavDiv);
 });
 
-// Event listener that displays the todos of a project upon clicking its nav button.
+// Event listener that displays the todos of a project upon clicking its nav button,
+// and deletes the project and empties the mainContent upon clicking its delete button.
 newProjectsContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "DIV") {
     const dataProjectName = event.target.getAttribute("data-project-name");
-    displayProject(projectsArray, dataProjectName);
+    storeProjectsArray(projectsArray);
+    const lSProjectsArray = retrieveProjectsArray();
+    displayProject(lSProjectsArray, dataProjectName);
+    expandStatus = false;
   }
-});
 
-newProjectsContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "BUTTON") {
     const dataProjectName = event.target.getAttribute("data-project-name");
     projectsArray.forEach((proj) => {
       if (proj.projectName === dataProjectName) {
         projectsArray.splice(projectsArray.indexOf(proj), 1);
+        storeProjectsArray(projectsArray);
         if (
-          event.target.parentElement.getAttribute("data-project-name") ===
+          event.target.parentElement.getAttribute("dataq-project-name") ===
           dataProjectName
         ) {
           event.target.parentElement.innerHTML = "";
           mainContent.innerHTML = "";
+        }
+        for (const child of selectProjects) {
+          if (child.getAttribute("value") === dataProjectName) {
+            selectProjects.removeChild(child);
+          }
         }
       }
     });
@@ -240,7 +294,9 @@ mainContent.addEventListener("click", (event) => {
       if (item.projectName === dataProjectName) {
         item.deleteTodo(dataDeleteBtn);
       }
-      displayProject(projectsArray, dataProjectName);
+      storeProjectsArray(projectsArray);
+      const lSProjectsArray = retrieveProjectsArray();
+      displayProject(lSProjectsArray, dataProjectName);
     });
   }
 
@@ -260,7 +316,9 @@ mainContent.addEventListener("click", (event) => {
       }
       displayProject(projectsArray, dataProjectName);
     });
-    expandStatus = false;
+    storeProjectsArray(projectsArray);
+    const lSProjectsArray = retrieveProjectsArray();
+    displayProject(lSProjectsArray, dataProjectName);
   }
 });
 
@@ -275,17 +333,15 @@ dueDate.addEventListener("focus", () => {
   document.getElementById("due-date").setAttribute("min", today);
 });
 
-const dateProjectsArray = [];
-const todayProj = new project("today");
-const upcomingProj = new project("upcoming");
-dateProjectsArray.push(todayProj, upcomingProj);
-
 // Event listener to display the inbox, today and upcoming and its todos in the main-content area upon clicking their respective nav item.
 const navBtnsOne = document.querySelector(".nav-btns-one");
 navBtnsOne.addEventListener("click", (event) => {
   if (event.target.classList.contains("inbox")) {
     const dataProjectName = event.target.getAttribute("data-project-name");
-    displayProject(projectsArray, dataProjectName);
+    storeProjectsArray(projectsArray);
+    const lSProjectsArray = retrieveProjectsArray();
+    displayProject(lSProjectsArray, dataProjectName);
+    expandStatus = false;
   }
 
   if (event.target.classList.contains("today")) {
@@ -302,7 +358,10 @@ navBtnsOne.addEventListener("click", (event) => {
         }
       });
     });
-    displayProject(dateProjectsArray, "today");
+    storeDateProjectsArray(dateProjectsArray);
+    const lSDateProjectsArray = retrieveDateProjectsArray();
+    displayProject(lSDateProjectsArray, "today");
+    expandStatus = false;
   }
 
   if (event.target.classList.contains("upcoming")) {
@@ -319,6 +378,9 @@ navBtnsOne.addEventListener("click", (event) => {
         }
       });
     });
-    displayProject(dateProjectsArray, "upcoming");
+    storeDateProjectsArray(dateProjectsArray);
+    const lSDateProjectsArray = retrieveDateProjectsArray();
+    displayProject(lSDateProjectsArray, "upcoming");
+    expandStatus = false;
   }
 });

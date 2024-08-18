@@ -111,10 +111,15 @@ export default function displayProject(projectsArray, dataProjectName) {
         todoExtension.append(descriptionPara, buttonsDiv);
 
         // Adding everything to todoDiv and that to projectDiv and then to mainContent
-        if (element.projectName === "today" || element.projectName === "upcoming") {
+        if (
+          element.projectName === "today" ||
+          element.projectName === "upcoming"
+        ) {
           const todoProject = document.createElement("p");
           todoProject.textContent = `# ${todo.project}`;
-          todoProject.style.cssText = "position: relative; top: -10px; left: -10px;"
+          buttonsDiv.remove();
+          todoProject.style.cssText =
+            "position: relative; top: -10px; left: -10px;";
           todoDiv.append(todoProject, todoFirstRow, todoExtension, expandBtn);
         } else {
           todoDiv.append(todoFirstRow, todoExtension, expandBtn);
