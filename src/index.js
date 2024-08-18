@@ -184,7 +184,7 @@ mainContent.addEventListener("mouseout", (event) => {
 });
 
 // Event listener for the expand button to show the additional details of the task,
-// edit & delete the task and change it's completion status
+// edit & delete button for the task and completed toggle checkbox to  change it's completion status
 let expandStatus = false;
 mainContent.addEventListener("click", (event) => {
   if (event.target.classList.contains("expand-btn")) {
