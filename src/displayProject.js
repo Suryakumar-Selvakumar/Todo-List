@@ -1,4 +1,4 @@
-export default function displayProject(projectsArray, dataProjectName) {
+export default function displayProject(projectsArray, dataProjectName, expandStatus) {
   const mainContent = document.querySelector(".main-content");
   const projectDiv = document.createElement("div");
   projectDiv.classList.add("project-div");
@@ -23,7 +23,6 @@ export default function displayProject(projectsArray, dataProjectName) {
         const dueDatePara = document.createElement("p");
 
         titlePara.textContent = `${todo.title}`;
-        titlePara.style.cssText = "font-size: 2rem;";
         descriptionPara.textContent = `${todo.description}`;
         descriptionPara.classList.add("description-para");
         dueDatePara.textContent = `${todo.dueDate}`;
@@ -107,7 +106,11 @@ export default function displayProject(projectsArray, dataProjectName) {
           "data-extension-index",
           element.todoList.indexOf(todo)
         );
-        todoExtension.style.cssText = "display: none;";
+        if(expandStatus) {
+          todoExtension.style.cssText = "display: flex;";
+        } else {
+          todoExtension.style.cssText = "display: none;";
+        }
         todoExtension.append(descriptionPara, buttonsDiv);
 
         // Adding everything to todoDiv and that to projectDiv and then to mainContent

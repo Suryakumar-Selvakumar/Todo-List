@@ -54,6 +54,98 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 let dataIndex;
 
+const dashboard = document.querySelector(".dashboard");
+dashboard.addEventListener("click", (event) => {
+  if (event.target.tagName === "DIV") {
+    mainContent.innerHTML = "";
+
+    const homePageDiv = document.createElement("div");
+    homePageDiv.classList.add("home-page");
+
+    const welcomePara = document.createElement("p");
+    welcomePara.textContent = "Instructions";
+
+    const helperList = document.createElement("ul");
+    helperList.classList.add("helper-list");
+
+    const listItemsOne = document.createElement("li");
+    listItemsOne.classList.add("list-items-one");
+    listItemsOne.textContent = "Add Task";
+    const spanOne = document.createElement("span");
+    spanOne.textContent = "-";
+    const paraOne = document.createElement("p");
+    paraOne.textContent = "Add your tasks";
+    listItemsOne.append(spanOne, paraOne);
+
+    const listItemsTwo = document.createElement("li");
+    listItemsTwo.classList.add("list-items-two");
+    listItemsTwo.textContent = "Inbox";
+    const spanTwo = document.createElement("span");
+    spanTwo.textContent = "-";
+    const paraTwo = document.createElement("p");
+    paraTwo.textContent = "Default storage for tasks";
+    listItemsTwo.append(spanTwo, paraTwo);
+
+    const listItemsThree = document.createElement("li");
+    listItemsThree.classList.add("list-items-three");
+    listItemsThree.textContent = "Today";
+    const spanThree = document.createElement("span");
+    spanThree.textContent = "-";
+    const paraThree = document.createElement("p");
+    paraThree.textContent = "Shows tasks that are due today";
+    listItemsThree.append(spanThree, paraThree);
+
+    const listItemsFour = document.createElement("li");
+    listItemsFour.classList.add("list-items-four");
+    listItemsFour.textContent = "Upcoming";
+    const spanFour = document.createElement("span");
+    spanFour.textContent = "-";
+    const paraFour = document.createElement("p");
+    paraFour.textContent = "Shows tasks that are due in the future";
+    listItemsFour.append(spanFour, paraFour);
+
+    const listItemsFive = document.createElement("li");
+    listItemsFive.classList.add("list-items-five");
+    listItemsFive.textContent = "My Projects";
+    const spanFive = document.createElement("span");
+    spanFive.textContent = "-";
+    const paraFive = document.createElement("p");
+    paraFive.textContent = "Add your own custom projects";
+    listItemsFive.append(spanFive, paraFive);
+
+    const listItemsSix = document.createElement("li");
+    listItemsSix.classList.add("list-items-six");
+    listItemsSix.textContent = "Clear All Tasks";
+    const spanSix = document.createElement("span");
+    spanSix.textContent = "-";
+    const paraSix = document.createElement("p");
+    paraSix.textContent = "Deletes all tasks from the app";
+    listItemsSix.append(spanSix, paraSix);
+
+    const listItemsSeven = document.createElement("li");
+    listItemsSeven.classList.add("list-items-six");
+    listItemsSeven.textContent = "Task Buttons";
+    const spanSeven = document.createElement("span");
+    spanSeven.textContent = "-";
+    const paraSeven = document.createElement("p");
+    paraSeven.textContent = "Change status, edit or delete task";
+    listItemsSeven.append(spanSeven, paraSeven);
+
+    helperList.append(
+      listItemsOne,
+      listItemsTwo,
+      listItemsThree,
+      listItemsFour,
+      listItemsFive,
+      listItemsSix,
+      listItemsSeven
+    );
+    homePageDiv.append(welcomePara, helperList);
+
+    mainContent.appendChild(homePageDiv);
+  }
+});
+
 // TASK FORM
 const taskForm = document.querySelector(".add-task-form");
 const cancelTaskBtn = document.querySelector("#cancel");
@@ -317,7 +409,8 @@ mainContent.addEventListener("click", (event) => {
     });
     storeProjectsArray(projectsArray);
     const lSProjectsArray = retrieveProjectsArray();
-    displayProject(lSProjectsArray, dataProjectName);
+    displayProject(lSProjectsArray, dataProjectName, expandStatus);
+    // expandStatus = false;
   }
 });
 
@@ -390,8 +483,8 @@ footer.addEventListener("click", () => {
   localStorage.clear();
   todayProj.todoList = [];
   upcomingProj.todoList = [];
-  projectsArray.forEach(item => {
+  projectsArray.forEach((item) => {
     item.todoList = [];
-  })
+  });
   mainContent.innerHTML = "";
 });
