@@ -32,7 +32,7 @@ body {
   display: grid;
   height: 100vh;
   width: 100vw;
-  grid-template-columns: min-content 1fr;
+  grid-template-columns: minmax(300px, 1fr) 6fr;
 }
 
 .sidebar {
@@ -40,25 +40,25 @@ body {
   background-color: #00b4d8;
   color: white;
   flex-direction: column;
-  justify-content: start;
   gap: 7.5vh;
-  min-width: 20vw;
+  width: 100%;
   height: 100vh;
-  /* color: rgb(0, 150, 0) */
 }
 
 .dashboard {
-  padding-left: 1rem;
+  padding-left: 0rem;
   padding-top: 1rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
   grid-column: 1 / 2;
+  align-self: center;
 }
 
 .dashboard > div {
   font-weight: 600;
-  font-size: 2.5rem;
+  font-size: 3.25rem;
+  position: relative;
+  left: -10px;
 }
 
 .dashboard:hover {
@@ -67,14 +67,14 @@ body {
 
 .dashboard-icon {
   fill: white;
-  width: 4rem;
-  height: 4rem;
+  width: 6rem;
+  height: 6rem;
 }
 
 .nav-btns-one {
   display: flex;
   flex-direction: column;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 600;
   /* padding-right: 1rem; */
 }
@@ -110,10 +110,9 @@ body {
 
 .project {
   display: flex;
-  justify-content: flex-start;
-  gap: 1rem;
+  justify-content: space-around;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   padding-left: 1rem;
   padding-bottom: 0.5rem;
 }
@@ -124,8 +123,15 @@ body {
   }
 }
 
+.project-icon {
+  position: relative;
+  left: -1rem;
+}
+
 .project > p {
-  cursor: pointer;
+  cursor: default;
+  position: relative;
+  left: -2rem;
 }
 
 .new-projects-container {
@@ -134,7 +140,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .project-item {
@@ -155,16 +161,19 @@ body {
   }
 }
 
+.footer {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
 .delete-project-btn {
-  position: relative;
-  top: 1.5px;
   background-color: #0077b6;
   border: none;
   border-radius: 3px;
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   background-image: url("/src/delete-outline.svg");
-  background-size: 20px;
+  background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
@@ -172,7 +181,7 @@ body {
 }
 
 .delete-project-btn:hover {
-  background-color: rgb(241, 41, 41);
+  background-color: rgb(146, 146, 146);
 }
 
 #add-project-btn {
@@ -183,10 +192,12 @@ body {
   width: 20px;
   height: 20px;
   cursor: pointer;
+  position: relative;
+  top: 1px;
 }
 
 .main-content {
-  padding: 1rem;
+  padding: 1rem 5rem;
   display: flex;
   justify-content: start;
   flex-direction: column;
@@ -206,18 +217,72 @@ body {
 }
 
 .add-task-form {
+  width: 670px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   visibility: hidden;
   position: absolute;
-  top: 40vh;
+  background-color: white;
+  top: 35vh;
   left: 40vw;
   box-shadow: 3px 4px 15px 1px rgba(98, 93, 93, 1);
+  font-size: 2rem;
+  gap: 1rem;
+}
+#task,
+#description {
+  width: 600px;
+}
+
+#due-date,
+#priority {
+  font-size: 1.75rem;
+}
+
+#due-date {
+  height: 35px;
+}
+
+#priority {
+  width: 175px;
+  height: 40px;
+}
+
+#task,
+#description {
+  font-size: 2rem;
+}
+
+.date-priority {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
 }
 
 textarea {
   resize: none;
+}
+
+#last-form-div {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+}
+
+#last-form-div > button {
+  font-size: 2rem;
+  cursor: pointer;
+  width: 150px;
+}
+
+select[name="projects"] {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  width: 175px;
 }
 
 .project-form-container {
@@ -249,14 +314,38 @@ textarea {
 }
 
 .add-project-form {
+  width: 625px;
+  height: 125px;
   display: flex;
   flex-direction: column;
   align-items: center;
   visibility: hidden;
   position: absolute;
+  background-color: white;
   top: 40vh;
   left: 40vw;
   box-shadow: 3px 4px 15px 1px rgba(98, 93, 93, 1);
+  font-size: 2rem;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+#project {
+  font-size: 2rem;
+  width: 600px;
+}
+
+.add-project-form > div {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+}
+
+.add-project-form > div > button {
+  font-size: 2rem;
+  cursor: pointer;
+  width: 200px;
 }
 
 .expand-btn {

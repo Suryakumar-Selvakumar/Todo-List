@@ -10,7 +10,7 @@ export default function displayProject(projectsArray, dataProjectName) {
       mainContent.innerHTML = "";
       projectHeader.textContent = `${element.projectName}`;
       projectHeader.style.cssText =
-        "text-align: center; text-transform: capitalize;";
+        "text-align: center; text-transform: capitalize; font-size: 3rem;";
       projectDiv.appendChild(projectHeader);
 
       // Iterating through the todolist of the project and displaying all the todos

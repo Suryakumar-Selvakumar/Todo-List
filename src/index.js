@@ -9,8 +9,6 @@ import {
   retrieveDateProjectsArray,
 } from "./localStorageModule.js";
 
-// localStorage.clear();
-
 const mainContent = document.querySelector(".main-content");
 
 let projectsArray = [];
@@ -94,7 +92,8 @@ projectDefaultOption.setAttribute("selected", "selected");
 projectDefaultOption.setAttribute("value", "inbox");
 projectDefaultOption.textContent = "inbox";
 selectProjects.appendChild(projectDefaultOption);
-cancelTaskBtn.insertAdjacentElement("beforebegin", selectProjects);
+const datePriorityDiv = document.querySelector(".date-priority");
+datePriorityDiv.appendChild(selectProjects);
 
 // Event listener to use the formData to call the todo constructor
 taskForm.addEventListener("formdata", (e) => {
@@ -214,7 +213,7 @@ newProjectsContainer.addEventListener("click", (event) => {
         projectsArray.splice(projectsArray.indexOf(proj), 1);
         storeProjectsArray(projectsArray);
         if (
-          event.target.parentElement.getAttribute("dataq-project-name") ===
+          event.target.parentElement.getAttribute("data-project-name") ===
           dataProjectName
         ) {
           event.target.parentElement.innerHTML = "";
@@ -383,4 +382,16 @@ navBtnsOne.addEventListener("click", (event) => {
     displayProject(lSDateProjectsArray, "upcoming");
     expandStatus = false;
   }
+});
+
+// Event listener to delete all todos
+const footer = document.querySelector(".footer");
+footer.addEventListener("click", () => {
+  localStorage.clear();
+  todayProj.todoList = [];
+  upcomingProj.todoList = [];
+  projectsArray.forEach(item => {
+    item.todoList = [];
+  })
+  mainContent.innerHTML = "";
 });

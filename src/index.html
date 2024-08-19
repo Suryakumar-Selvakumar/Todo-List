@@ -8,24 +8,20 @@
   <body>
     <div class="task-form-container">
       <form class="add-task-form" autocomplete="off">
-        <div>
-          <label for="task">Task:</label>
-          <input type="text" id="task" name="task" required/>
+          <input placeholder="Task Name" type="text" id="task" name="task" required/>
+          <textarea placeholder="Description" name="description" id="description"></textarea>
+        <div class="date-priority">
+          <div>
+          <input placeholder="Due date" type="date" id="due-date" name="due-date" required/>
         </div>
         <div>
-          <label for="description">Description</label>
-          <textarea name="description" id="description" cols="40" rows="5"></textarea>
-        </div>
-        <div>
-          <label for="due-date">Due Date:</label>
-          <input type="date" id="due-date" name="due-date" required/>
-          <label for="priority">Priority: </label>
-          <select name="priority" id="priority">
+          <select title="priority" name="priority" id="priority">
             <option value="p1">Priority 1</option>
             <option value="p2">Priority 2</option>
             <option value="p3">Priority 3</option>
             <option value="p4">Priority 4</option>
           </select>
+        </div>
         </div>
         <div id="last-form-div">
           <button id="cancel" type="button">Cancel</button>
@@ -35,10 +31,7 @@
     </div>
     <div class="project-form-container">
       <form class="add-project-form" autocomplete="off">
-        <div>
-          <label for="project">Name:</label>
-          <input type="text" id="project" name="project" required/>
-        </div>
+          <input placeholder="Name" type="text" id="project" name="project" required/>
         <div>
           <button id="cancel-project" type="button">Cancel</button>
           <button type="submit">Add Project</button>
@@ -51,10 +44,10 @@
           <svg
           class="dashboard-icon" 
           xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24">
+          viewBox="0 0 32 24">
           <path d="M9,5V9H21V5M9,19H21V15H9M9,14H21V10H9M4,9H8V5H4M4,19H8V15H4M4,14H8V10H4V14Z" />
           </svg>
-          <div>Dashboard</div>
+          <div>TaskFlow</div>
         </div>
         <div class="nav-btns-one">
           <div class="nav-btn add-task-btn">
@@ -97,7 +90,7 @@
         <div class="nav-btns-two">
           <div class="project">
             <svg 
-            class="nav-icons"
+            class="nav-icons project-icon"
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 24 24">
             <path d="M3 5V19H21V5H3M19 7V9H5V7H19M19 11V13H5V11H19M5 17V15H19V17H5Z" />
@@ -106,6 +99,17 @@
             <button id="add-project-btn" type="button">+</button>
           </div>
           <div class="new-projects-container">
+          </div>
+        </div>
+        <div class="footer">
+          <div class="nav-btn">
+            <svg 
+            class="nav-icons"
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24">
+            <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" fill="white" />
+            </svg>
+            <p>Clear All Tasks</p>
           </div>
         </div>
       </div>
