@@ -8,17 +8,17 @@
   font-family: "myFontRegular";
   src: url("./didot-webfont.woff2") format("woff2"),
     url("./didot-webfont.woff") format("woff");
-}
+} */
 
 @font-face {
   font-family: "myFontTitle";
-  src: url("./Cravas.woff") format("woff");
-} */
+  src: url("./recons-nr1mg-webfont.woff2") format("woff2");
+}
 
 * {
   margin: 0;
   padding: 0;
-  font-family: "Open Sans";
+  font-family: "myFontTitle";
 }
 
 body {
@@ -32,12 +32,12 @@ body {
   display: grid;
   height: 100vh;
   width: 100vw;
-  grid-template-columns: minmax(300px, 1fr) 6fr;
+  grid-template-columns: minmax(400px, 1fr) 6fr;
 }
 
 .sidebar {
   display: flex;
-  background-color: #00b4d8;
+  background-color: #2b2b2b;
   color: white;
   flex-direction: column;
   gap: 7.5vh;
@@ -55,10 +55,10 @@ body {
 }
 
 .dashboard > div {
-  font-weight: 600;
   font-size: 3.25rem;
   position: relative;
   left: -10px;
+  top: 2.5px;
 }
 
 .dashboard:hover {
@@ -75,8 +75,6 @@ body {
   display: flex;
   flex-direction: column;
   font-size: 2rem;
-  font-weight: 600;
-  /* padding-right: 1rem; */
 }
 
 .nav-btn {
@@ -89,8 +87,13 @@ body {
   padding-right: 1rem;
 }
 
+.nav-btn > p {
+  position: relative;
+  top: 2px;
+}
+
 .nav-btn:hover {
-  background-color: #0077b6;
+  background-color: #656565;
   cursor: pointer;
 }
 
@@ -104,7 +107,6 @@ body {
   display: flex;
   flex-direction: column;
   font-size: 2rem;
-  font-weight: 600;
   height: 50vh;
 }
 
@@ -126,12 +128,15 @@ body {
 .project-icon {
   position: relative;
   left: -1rem;
+  width: 4rem;
+  height: 4rem;
 }
 
 .project > p {
   cursor: default;
   position: relative;
-  left: -2rem;
+  left: -1rem;
+  top: 2px;
 }
 
 .new-projects-container {
@@ -145,16 +150,17 @@ body {
 
 .project-item {
   padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
   padding-left: 1rem;
   padding-right: 1rem;
   text-transform: capitalize;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .project-item:hover {
-  background-color: #0077b6;
+  background-color: #656565;
   cursor: pointer;
   .delete-project-btn {
     display: flex;
@@ -163,37 +169,43 @@ body {
 
 .footer {
   font-size: 2rem;
-  font-weight: 600;
 }
 
 .delete-project-btn {
-  background-color: #0077b6;
+  background-color: #656565;
   border: none;
   border-radius: 3px;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background-image: url("/src/delete-outline.svg");
-  background-size: 30px;
+  background-size: 25px;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
   display: none;
+  position: relative;
+  top: -0.75px;
 }
 
 .delete-project-btn:hover {
-  background-color: rgb(146, 146, 146);
+  background-color: rgb(80, 0, 0);
+}
+
+.add-project {
+  width: 20px;
+  height: 20px;
 }
 
 #add-project-btn {
   visibility: hidden;
   justify-self: end;
-  border-radius: 100%;
+  border-radius: 3px;
   border: none;
   width: 20px;
   height: 20px;
   cursor: pointer;
   position: relative;
-  top: 1px;
+  top: -0.75px;
 }
 
 .main-content {
