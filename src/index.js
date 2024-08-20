@@ -179,6 +179,7 @@ taskForm.addEventListener("submit", (event) => {
 // Creating a select dropdown, assigning the default option - "inbox" to it, then inserting it before the cancel button in add task form
 const selectProjects = document.createElement("select");
 selectProjects.setAttribute("name", "projects");
+selectProjects.setAttribute("id", "projects");
 const projectDefaultOption = document.createElement("option");
 projectDefaultOption.setAttribute("selected", "selected");
 projectDefaultOption.setAttribute("value", "inbox");
@@ -358,6 +359,11 @@ mainContent.addEventListener("click", (event) => {
   if (event.target.classList.contains("expand-btn")) {
     for (const child of event.target.parentElement.children) {
       if (child.classList.contains("todo-extension-div")) {
+        if(child.style.cssText === "display: none;") {
+          expandStatus = false;
+        } else {
+          expandStatus = true;
+        }
         if (expandStatus === false) {
           child.style.cssText = "display: flex;";
           expandStatus = true;
@@ -370,12 +376,29 @@ mainContent.addEventListener("click", (event) => {
   }
 
   if (event.target.classList.contains("edit-todo-btn")) {
+    const dataEditBtn = event.target.getAttribute("data-edit-btn");
+    const dataProjectName = event.target.getAttribute("data-project-name");
+    dataIndex = dataEditBtn;
+
+    projectsArray.forEach((item) => {
+      if (item.projectName === dataProjectName) {
+        item.todoList.forEach((todoObj) => {
+          if (item.todoList.indexOf(todoObj) == dataEditBtn) {
+            document.getElementById("task").value = todoObj.title;
+            document.getElementById("due-date").value = todoObj.dueDate;
+            document.getElementById("priority").value = todoObj.priority;
+            document.getElementById("description").value = todoObj.description;
+            document.getElementById("projects").value = todoObj.project;
+
+            item.todoList.splice(dataEditBtn, 1);
+          }
+        });
+      }
+    });
+
     taskForm.style.cssText = "visibility: visible;";
     taskFormContainer.style.cssText = "visibility: visible;";
     projectForm.style.cssText = "visibility: hidden;";
-
-    const dataEditBtn = event.target.getAttribute("data-edit-btn");
-    dataIndex = dataEditBtn;
   }
 
   if (event.target.classList.contains("delete-todo-btn")) {

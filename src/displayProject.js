@@ -47,6 +47,10 @@ export default function displayProject(projectsArray, dataProjectName, expandSta
           "data-edit-btn",
           element.todoList.indexOf(todo)
         );
+        editTodoBtn.setAttribute(
+          "data-project-name",
+          element.projectName
+        );
 
         // Delete button to delete the task
         const deleteTodoBtn = document.createElement("button");
