@@ -1,4 +1,8 @@
-export default function displayProject(projectsArray, dataProjectName, expandStatus) {
+export default function displayProject(
+  projectsArray,
+  dataProjectName,
+  expandStatus,
+) {
   const mainContent = document.querySelector(".main-content");
   const projectDiv = document.createElement("div");
   projectDiv.classList.add("project-div");
@@ -45,12 +49,9 @@ export default function displayProject(projectsArray, dataProjectName, expandSta
         editTodoBtn.setAttribute("type", "button");
         editTodoBtn.setAttribute(
           "data-edit-btn",
-          element.todoList.indexOf(todo)
+          element.todoList.indexOf(todo),
         );
-        editTodoBtn.setAttribute(
-          "data-project-name",
-          element.projectName
-        );
+        editTodoBtn.setAttribute("data-project-name", element.projectName);
 
         // Delete button to delete the task
         const deleteTodoBtn = document.createElement("button");
@@ -58,7 +59,7 @@ export default function displayProject(projectsArray, dataProjectName, expandSta
         deleteTodoBtn.setAttribute("type", "button");
         deleteTodoBtn.setAttribute(
           "data-delete-btn",
-          element.todoList.indexOf(todo)
+          element.todoList.indexOf(todo),
         );
         deleteTodoBtn.setAttribute("data-project-name", element.projectName);
 
@@ -72,11 +73,11 @@ export default function displayProject(projectsArray, dataProjectName, expandSta
         completedCheckBox.setAttribute("type", "checkbox");
         completedCheckBox.setAttribute(
           "data-completed-btn",
-          element.todoList.indexOf(todo)
+          element.todoList.indexOf(todo),
         );
         completedCheckBox.setAttribute(
           "data-project-name",
-          element.projectName
+          element.projectName,
         );
         if (todo.completedStatus === true) {
           completedCheckBox.checked = true;
@@ -108,9 +109,9 @@ export default function displayProject(projectsArray, dataProjectName, expandSta
         todoExtension.classList.add("todo-extension-div");
         todoExtension.setAttribute(
           "data-extension-index",
-          element.todoList.indexOf(todo)
+          element.todoList.indexOf(todo),
         );
-        if(expandStatus) {
+        if (expandStatus) {
           todoExtension.style.cssText = "display: flex;";
         } else {
           todoExtension.style.cssText = "display: none;";

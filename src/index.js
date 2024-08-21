@@ -138,7 +138,7 @@ dashboard.addEventListener("click", (event) => {
       listItemsFour,
       listItemsFive,
       listItemsSix,
-      listItemsSeven
+      listItemsSeven,
     );
     homePageDiv.append(welcomePara, helperList);
 
@@ -207,7 +207,7 @@ taskForm.addEventListener("formdata", (e) => {
     dueDateValue,
     priorityValue,
     descriptionValue,
-    projectValue
+    projectValue,
   );
 
   //   Code to push todo into the currently selected project
@@ -359,7 +359,7 @@ mainContent.addEventListener("click", (event) => {
   if (event.target.classList.contains("expand-btn")) {
     for (const child of event.target.parentElement.children) {
       if (child.classList.contains("todo-extension-div")) {
-        if(child.style.cssText === "display: none;") {
+        if (child.style.cssText === "display: none;") {
           expandStatus = false;
         } else {
           expandStatus = true;
@@ -456,7 +456,6 @@ function returnToday() {
   today = yyyy + "-" + mm + "-" + dd;
   return today;
 }
-
 
 // Event listener to display the inbox, today and upcoming and its todos in the main-content area upon clicking their respective nav item.
 const navBtnsOne = document.querySelector(".nav-btns-one");

@@ -572,7 +572,7 @@ select[name="projects"]:focus {
 .home-page {
   font-family: "myFontTitle";
   color: white;
-  background-color:#2b2b2b;
+  background-color: #2b2b2b;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
