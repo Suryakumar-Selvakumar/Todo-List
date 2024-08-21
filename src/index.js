@@ -21,7 +21,7 @@ const upcomingProj = new project("upcoming");
 dateProjectsArray.push(todayProj, upcomingProj);
 
 // Event listener to display the existing local Storage date upon page load/reload
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", () => {
   const lSProjectsArray = retrieveProjectsArray();
 
   lSProjectsArray.forEach((proj) => {
@@ -448,6 +448,16 @@ dueDate.addEventListener("focus", () => {
   document.getElementById("due-date").setAttribute("min", today);
 });
 
+function returnToday() {
+  let today = new Date();
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  var yyyy = today.getFullYear();
+  today = yyyy + "-" + mm + "-" + dd;
+  return today;
+}
+
+
 // Event listener to display the inbox, today and upcoming and its todos in the main-content area upon clicking their respective nav item.
 const navBtnsOne = document.querySelector(".nav-btns-one");
 navBtnsOne.addEventListener("click", (event) => {
@@ -461,11 +471,7 @@ navBtnsOne.addEventListener("click", (event) => {
 
   if (event.target.classList.contains("today")) {
     todayProj.todoList = [];
-    let today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
+    const today = returnToday();
     projectsArray.forEach((proj) => {
       proj.todoList.forEach((item) => {
         if (item.dueDate == today) {
@@ -481,11 +487,7 @@ navBtnsOne.addEventListener("click", (event) => {
 
   if (event.target.classList.contains("upcoming")) {
     upcomingProj.todoList = [];
-    let today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
+    const today = returnToday();
     projectsArray.forEach((proj) => {
       proj.todoList.forEach((item) => {
         if (item.dueDate > today) {
