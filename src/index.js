@@ -25,28 +25,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const lSProjectsArray = retrieveProjectsArray();
 
   lSProjectsArray.forEach((proj) => {
+    if (proj.projectName !== "inbox") {
+      const newProject = new project(proj.projectName);
+      newProject.todoList = [...proj.todoList];
+      projectsArray.push(newProject);
+      const projectNavDiv = document.createElement("div");
+      projectNavDiv.classList.add("project-item");
+      projectNavDiv.setAttribute("data-project-name", proj.projectName);
+      projectNavDiv.textContent = `${proj.projectName}`;
+      const deleteProjectBtn = document.createElement("button");
+      deleteProjectBtn.classList.add("delete-project-btn");
+      deleteProjectBtn.setAttribute("data-project-name", proj.projectName);
+      projectNavDiv.appendChild(deleteProjectBtn);
+      newProjectsContainer.appendChild(projectNavDiv);
+
+      const projectOption = document.createElement("option");
+      projectOption.setAttribute("value", proj.projectName);
+      projectOption.textContent = `${proj.projectName}`;
+      selectProjects.appendChild(projectOption);
+    }
     projectsArray.forEach((item) => {
       if (item.projectName === proj.projectName) {
         item.todoList = [...proj.todoList];
-      } else {
-        const newProject = new project(proj.projectName);
-        newProject.todoList = [...proj.todoList];
-        projectsArray.push(newProject);
-
-        const projectNavDiv = document.createElement("div");
-        projectNavDiv.classList.add("project-item");
-        projectNavDiv.setAttribute("data-project-name", proj.projectName);
-        projectNavDiv.textContent = `${proj.projectName}`;
-        const deleteProjectBtn = document.createElement("button");
-        deleteProjectBtn.classList.add("delete-project-btn");
-        deleteProjectBtn.setAttribute("data-project-name", proj.projectName);
-        projectNavDiv.appendChild(deleteProjectBtn);
-        newProjectsContainer.appendChild(projectNavDiv);
-
-        const projectOption = document.createElement("option");
-        projectOption.setAttribute("value", proj.projectName);
-        projectOption.textContent = `${proj.projectName}`;
-        selectProjects.appendChild(projectOption);
       }
     });
   });
@@ -138,7 +138,7 @@ dashboard.addEventListener("click", (event) => {
       listItemsFour,
       listItemsFive,
       listItemsSix,
-      listItemsSeven,
+      listItemsSeven
     );
     homePageDiv.append(welcomePara, helperList);
 
@@ -207,7 +207,7 @@ taskForm.addEventListener("formdata", (e) => {
     dueDateValue,
     priorityValue,
     descriptionValue,
-    projectValue,
+    projectValue
   );
 
   //   Code to push todo into the currently selected project
