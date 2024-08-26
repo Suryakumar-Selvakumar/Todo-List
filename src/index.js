@@ -309,7 +309,10 @@ newProjectsContainer.addEventListener("click", (event) => {
           event.target.parentElement.getAttribute("data-project-name") ===
           dataProjectName
         ) {
-          event.target.parentElement.innerHTML = "";
+          event.target.parentElement.parentElement.removeChild(
+            event.target.parentElement
+          );
+          // event.target.parentElement.style.cssText = "display: none;"
           mainContent.innerHTML = "";
         }
         for (const child of selectProjects) {
