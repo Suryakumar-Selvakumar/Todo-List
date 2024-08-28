@@ -393,7 +393,7 @@ mainContent.addEventListener("click", (event) => {
             document.getElementById("description").value = todoObj.description;
             document.getElementById("projects").value = todoObj.project;
 
-            item.todoList.splice(dataEditBtn, 1);
+            delete item.todoList[dataEditBtn];
           }
         });
       }
