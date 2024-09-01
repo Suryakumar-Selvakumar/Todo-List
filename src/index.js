@@ -420,6 +420,7 @@ mainContent.addEventListener("click", (event) => {
   if (event.target.classList.contains("completed-todo-btn")) {
     const index = event.target.getAttribute("data-completed-btn");
     const dataProjectName = event.target.getAttribute("data-project-name");
+    const todoExtensionStyles = [];
     projectsArray.forEach((item) => {
       if (item.projectName === dataProjectName) {
         if (
@@ -435,8 +436,21 @@ mainContent.addEventListener("click", (event) => {
     });
     storeProjectsArray(projectsArray);
     const lSProjectsArray = retrieveProjectsArray();
-    displayProject(lSProjectsArray, dataProjectName, expandStatus);
-    // expandStatus = false;
+    for (const child of event.target.parentElement.parentElement.parentElement
+      .parentElement.parentElement.children) {
+      for (const todoElem of child.children) {
+        if (todoElem.classList.contains("todo-extension-div")) {
+          todoExtensionStyles.push(todoElem.style.cssText);
+        }
+      }
+    }
+    displayProject(
+      lSProjectsArray,
+      dataProjectName,
+      expandStatus,
+      index,
+      todoExtensionStyles
+    );
   }
 });
 
