@@ -314,6 +314,7 @@ newProjectsContainer.addEventListener("click", (event) => {
     const lSProjectsArray = retrieveProjectsArray();
     displayProject(lSProjectsArray, dataProjectName);
     expandStatus = false;
+    document.querySelector(".empty-project").style.cssText = "display: flex;";
   }
 
   if (event.target.tagName === "BUTTON") {
@@ -407,30 +408,29 @@ mainContent.addEventListener("click", (event) => {
     taskFormContainer.style.cssText = "visibility: visible;";
     projectForm.style.cssText = "visibility: hidden;";
 
-    // Wait for the promise to resolve or reject
-    cancelStatus
-      .then(() => {
-        // Logic for when the form is submitted
-        projectsArray.forEach((item) => {
-          if (item.projectName === dataProjectName) {
-            item.todoList.forEach((todoObj) => {
-              if (item.todoList.indexOf(todoObj) == dataEditBtn) {
-                document.getElementById("task").value = todoObj.title;
-                document.getElementById("due-date").value = todoObj.dueDate;
-                document.getElementById("priority").value = todoObj.priority;
-                document.getElementById("description").value =
-                  todoObj.description;
-                document.getElementById("projects").value = todoObj.project;
+    // Logic for when the form is submitted
+    projectsArray.forEach((item) => {
+      if (item.projectName === dataProjectName) {
+        item.todoList.forEach((todoObj) => {
+          if (item.todoList.indexOf(todoObj) == dataEditBtn) {
+            document.getElementById("task").value = todoObj.title;
+            document.getElementById("due-date").value = todoObj.dueDate;
+            document.getElementById("priority").value = todoObj.priority;
+            document.getElementById("description").value = todoObj.description;
+            document.getElementById("projects").value = todoObj.project;
+            // Wait for the promise to resolve or reject
+            cancelStatus
+              .then(() => {
                 delete item.todoList[dataEditBtn];
-              }
-            });
+              })
+              .catch(() => {
+                // Logic for when the cancel button is clicked
+                console.log("Editing cancelled.");
+              });
           }
         });
-      })
-      .catch(() => {
-        // Logic for when the cancel button is clicked
-        console.log("Editing cancelled.");
-      });
+      }
+    });
   }
 
   if (event.target.classList.contains("delete-todo-btn")) {
@@ -512,6 +512,7 @@ navBtnsOne.addEventListener("click", (event) => {
     const lSProjectsArray = retrieveProjectsArray();
     displayProject(lSProjectsArray, dataProjectName);
     expandStatus = false;
+    document.querySelector(".empty-project").style.cssText = "display: flex;";
   }
 
   if (event.target.classList.contains("today")) {
@@ -528,6 +529,7 @@ navBtnsOne.addEventListener("click", (event) => {
     const lSDateProjectsArray = retrieveDateProjectsArray();
     displayProject(lSDateProjectsArray, "today");
     expandStatus = false;
+    document.querySelector(".empty-project").style.cssText = "display: none;";
   }
 
   if (event.target.classList.contains("upcoming")) {
@@ -544,22 +546,33 @@ navBtnsOne.addEventListener("click", (event) => {
     const lSDateProjectsArray = retrieveDateProjectsArray();
     displayProject(lSDateProjectsArray, "upcoming");
     expandStatus = false;
+    document.querySelector(".empty-project").style.cssText = "display: none;";
   }
 });
 
 // Event listener to delete all todos
 const footer = document.querySelector(".footer");
 footer.addEventListener("click", (event) => {
-  // if (event.target.classList.contains("empty-project")) {
-  //   const dataProjectName = event.target.getAttribute("data-project-name");
-  //   projectsArray.forEach((element) => {
-  //     if (element.projectName === dataProjectName) {
-  //       element.todoList = [];
-  //     }
-  //   });
-  //   mainContent.lastChild.innerHTML = "";
-  //   storeProjectsArray(projectsArray);
-  // }
+  if (event.target.classList.contains("empty-project")) {
+    const dataProjectName = event.target.getAttribute("data-project-name");
+    projectsArray.forEach((element) => {
+      if (element.projectName === dataProjectName) {
+        element.todoList = [];
+      }
+    });
+    storeProjectsArray(projectsArray);
+    const todoDivArr = [];
+    for (const child of mainContent.children) {
+      for (const childItem of child.children) {
+        if (childItem.classList.contains("todo-div")) {
+          todoDivArr.push(childItem);
+        }
+      }
+    }
+    for (const todoDiv of todoDivArr) {
+      todoDiv.remove();
+    }
+  }
 
   if (event.target.classList.contains("clear-all-tasks")) {
     localStorage.clear();

@@ -19,9 +19,18 @@ export default function displayProject(
       projectHeader.style.cssText =
         "text-align: center; text-transform: capitalize; font-size: 3rem;";
       projectDiv.appendChild(projectHeader);
-      emptyProjectAll.forEach((item) =>
-        item.setAttribute("data-project-name", dataProjectName)
-      );
+      if (dataProjectName !== "today" && dataProjectName !== "upcoming") {
+        emptyProjectAll.forEach((item) => {
+          item.setAttribute("data-project-name", dataProjectName);
+        });
+      } else if (
+        dataProjectName === "today" ||
+        dataProjectName === "upcoming"
+      ) {
+        emptyProjectAll.forEach((item) => {
+          item.setAttribute("data-project-name", "");
+        });
+      }
 
       // Iterating through the todolist of the project and displaying all the todos
       element.todoList.forEach((todo) => {
