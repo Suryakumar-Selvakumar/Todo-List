@@ -152,6 +152,20 @@ const cancelTaskBtn = document.querySelector("#cancel");
 
 const taskFormContainer = document.querySelector(".task-form-container");
 
+// Declare variables to hold resolve and reject functions
+let resolveCancelStatus, rejectCancelStatus;
+let cancelStatus;
+
+// Function to create a new promise for cancel status
+function createCancelStatusPromise() {
+  cancelStatus = new Promise((resolve, reject) => {
+    resolveCancelStatus = resolve;
+    rejectCancelStatus = reject;
+  });
+}
+
+createCancelStatusPromise();
+
 // Event listener to make the add task form visible after clicking add task button
 const addTaskBtn = document.querySelector(".add-task-btn");
 addTaskBtn.addEventListener("click", () => {
@@ -159,21 +173,24 @@ addTaskBtn.addEventListener("click", () => {
   taskFormContainer.style.cssText = "visibility: visible;";
   projectForm.style.cssText = "visibility: hidden;";
 });
-
 // Event listener to close the add task form upon clicking cancel
 cancelTaskBtn.addEventListener("click", () => {
+  rejectCancelStatus(); // Reject the promise when cancel is clicked
   taskForm.reset();
   taskForm.style.cssText = "visibility: hidden";
   taskFormContainer.style.cssText = "visibility: hidden";
+  createCancelStatusPromise(); // Recreate the promise for the next use
 });
 
 // Event listener to submit add task form and get the formData
 taskForm.addEventListener("submit", (event) => {
+  resolveCancelStatus(); // Resolve the promise when form is submitted
   event.preventDefault();
   new FormData(taskForm);
   taskForm.reset();
   taskForm.style.cssText = "visibility: hidden";
   taskFormContainer.style.cssText = "visibility: hidden";
+  createCancelStatusPromise(); // Recreate the promise for the next use
 });
 
 // Creating a select dropdown, assigning the default option - "inbox" to it, then inserting it before the cancel button in add task form
@@ -379,29 +396,41 @@ mainContent.addEventListener("click", (event) => {
   }
 
   if (event.target.classList.contains("edit-todo-btn")) {
+    // Ensure the promise is recreated every time before using it
+    createCancelStatusPromise();
+
     const dataEditBtn = event.target.getAttribute("data-edit-btn");
     const dataProjectName = event.target.getAttribute("data-project-name");
     dataIndex = dataEditBtn;
 
-    projectsArray.forEach((item) => {
-      if (item.projectName === dataProjectName) {
-        item.todoList.forEach((todoObj) => {
-          if (item.todoList.indexOf(todoObj) == dataEditBtn) {
-            document.getElementById("task").value = todoObj.title;
-            document.getElementById("due-date").value = todoObj.dueDate;
-            document.getElementById("priority").value = todoObj.priority;
-            document.getElementById("description").value = todoObj.description;
-            document.getElementById("projects").value = todoObj.project;
-
-            delete item.todoList[dataEditBtn];
-          }
-        });
-      }
-    });
-
     taskForm.style.cssText = "visibility: visible;";
     taskFormContainer.style.cssText = "visibility: visible;";
     projectForm.style.cssText = "visibility: hidden;";
+
+    // Wait for the promise to resolve or reject
+    cancelStatus
+      .then(() => {
+        // Logic for when the form is submitted
+        projectsArray.forEach((item) => {
+          if (item.projectName === dataProjectName) {
+            item.todoList.forEach((todoObj) => {
+              if (item.todoList.indexOf(todoObj) == dataEditBtn) {
+                document.getElementById("task").value = todoObj.title;
+                document.getElementById("due-date").value = todoObj.dueDate;
+                document.getElementById("priority").value = todoObj.priority;
+                document.getElementById("description").value =
+                  todoObj.description;
+                document.getElementById("projects").value = todoObj.project;
+                delete item.todoList[dataEditBtn];
+              }
+            });
+          }
+        });
+      })
+      .catch(() => {
+        // Logic for when the cancel button is clicked
+        console.log("Editing cancelled.");
+      });
   }
 
   if (event.target.classList.contains("delete-todo-btn")) {
@@ -528,4 +557,9 @@ footer.addEventListener("click", () => {
     item.todoList = [];
   });
   mainContent.innerHTML = "";
+});
+
+const displayModeCheckBox = document.querySelector(".switch_4");
+displayModeCheckBox.addEventListener("change", () => {
+  document.body.classList.toggle("dark");
 });
