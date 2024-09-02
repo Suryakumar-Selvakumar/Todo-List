@@ -549,14 +549,27 @@ navBtnsOne.addEventListener("click", (event) => {
 
 // Event listener to delete all todos
 const footer = document.querySelector(".footer");
-footer.addEventListener("click", () => {
-  localStorage.clear();
-  todayProj.todoList = [];
-  upcomingProj.todoList = [];
-  projectsArray.forEach((item) => {
-    item.todoList = [];
-  });
-  mainContent.innerHTML = "";
+footer.addEventListener("click", (event) => {
+  // if (event.target.classList.contains("empty-project")) {
+  //   const dataProjectName = event.target.getAttribute("data-project-name");
+  //   projectsArray.forEach((element) => {
+  //     if (element.projectName === dataProjectName) {
+  //       element.todoList = [];
+  //     }
+  //   });
+  //   mainContent.lastChild.innerHTML = "";
+  //   storeProjectsArray(projectsArray);
+  // }
+
+  if (event.target.classList.contains("clear-all-tasks")) {
+    localStorage.clear();
+    todayProj.todoList = [];
+    upcomingProj.todoList = [];
+    projectsArray.forEach((item) => {
+      item.todoList = [];
+    });
+    mainContent.innerHTML = "";
+  }
 });
 
 const displayModeCheckBox = document.querySelector(".switch_4");

@@ -9,6 +9,7 @@ export default function displayProject(
   const projectDiv = document.createElement("div");
   projectDiv.classList.add("project-div");
   const projectHeader = document.createElement("h1");
+  const emptyProjectAll = document.querySelectorAll(".empty-project");
 
   // Iterating through the projectsArray and creating it's main-content page if the projectName matches
   projectsArray.forEach((element) => {
@@ -18,6 +19,9 @@ export default function displayProject(
       projectHeader.style.cssText =
         "text-align: center; text-transform: capitalize; font-size: 3rem;";
       projectDiv.appendChild(projectHeader);
+      emptyProjectAll.forEach((item) =>
+        item.setAttribute("data-project-name", dataProjectName)
+      );
 
       // Iterating through the todolist of the project and displaying all the todos
       element.todoList.forEach((todo) => {
