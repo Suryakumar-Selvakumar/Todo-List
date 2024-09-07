@@ -7,10 +7,11 @@ class project {
 
   // Adds a todo object to the todoList array
   addTodo(todoItem, index) {
-    if (index) {
-      this.todoList.splice(index, 1, todoItem);
+    // Only use index if it is explicitly a number
+    if (typeof index === "number") {
+      this.todoList[index] = todoItem; // Replace at the given index
     } else {
-      this.todoList.push(todoItem);
+      this.todoList.push(todoItem); // Add to the end if index is not provided
     }
   }
 

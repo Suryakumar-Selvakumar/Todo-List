@@ -669,7 +669,7 @@ select[name="projects"]:focus {
   display: grid;
   justify-content: space-between;
   align-items: center;
-  grid-template-columns: 1.5fr 0.35fr 4fr;
+  grid-template-columns: 1.516fr 0.35fr 4fr;
   width: 1200px;
   gap: 4.181rem;
 }

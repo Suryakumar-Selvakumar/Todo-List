@@ -50,98 +50,108 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  mainContent.appendChild(homePageDiv);
 });
 
+// DOM elements for Home Page
 let dataIndex;
+const homePageDiv = document.createElement("div");
+homePageDiv.classList.add("home-page");
 
+const welcomePara = document.createElement("p");
+welcomePara.textContent = "Instructions";
+
+const helperList = document.createElement("ul");
+helperList.classList.add("helper-list");
+
+const listItemsOne = document.createElement("li");
+listItemsOne.classList.add("list-items-one");
+listItemsOne.textContent = "Add Task";
+const spanOne = document.createElement("span");
+spanOne.textContent = "-";
+const paraOne = document.createElement("p");
+paraOne.textContent = "Add your tasks";
+listItemsOne.append(spanOne, paraOne);
+
+const listItemsTwo = document.createElement("li");
+listItemsTwo.classList.add("list-items-two");
+listItemsTwo.textContent = "Inbox";
+const spanTwo = document.createElement("span");
+spanTwo.textContent = "-";
+const paraTwo = document.createElement("p");
+paraTwo.textContent = "Default storage for tasks";
+listItemsTwo.append(spanTwo, paraTwo);
+
+const listItemsThree = document.createElement("li");
+listItemsThree.classList.add("list-items-three");
+listItemsThree.textContent = "Today";
+const spanThree = document.createElement("span");
+spanThree.textContent = "-";
+const paraThree = document.createElement("p");
+paraThree.textContent = "Tasks that are due today";
+listItemsThree.append(spanThree, paraThree);
+
+const listItemsFour = document.createElement("li");
+listItemsFour.classList.add("list-items-four");
+listItemsFour.textContent = "Upcoming";
+const spanFour = document.createElement("span");
+spanFour.textContent = "-";
+const paraFour = document.createElement("p");
+paraFour.textContent = "Tasks that are due in the future";
+listItemsFour.append(spanFour, paraFour);
+
+const listItemsFive = document.createElement("li");
+listItemsFive.classList.add("list-items-five");
+listItemsFive.textContent = "My Projects";
+const spanFive = document.createElement("span");
+spanFive.textContent = "-";
+const paraFive = document.createElement("p");
+paraFive.textContent = "Add your own custom projects";
+listItemsFive.append(spanFive, paraFive);
+
+const listItemsSix = document.createElement("li");
+listItemsSix.classList.add("list-items-six");
+listItemsSix.textContent = "Empty Project";
+const spanSix = document.createElement("span");
+spanSix.textContent = "-";
+const paraSix = document.createElement("p");
+paraSix.textContent = "Deletes all tasks in current project";
+listItemsSix.append(spanSix, paraSix);
+
+const listItemsSeven = document.createElement("li");
+listItemsSeven.classList.add("list-items-seven");
+listItemsSeven.textContent = "Delete All Tasks";
+const spanSeven = document.createElement("span");
+spanSeven.textContent = "-";
+const paraSeven = document.createElement("p");
+paraSeven.textContent = "Deletes all tasks from the app";
+listItemsSeven.append(spanSeven, paraSeven);
+
+const listItemsEight = document.createElement("li");
+listItemsEight.classList.add("list-items-seven");
+listItemsEight.textContent = "Task Buttons";
+const spanEight = document.createElement("span");
+spanEight.textContent = "-";
+const paraEight = document.createElement("p");
+paraEight.textContent = "Change status, edit or delete task";
+listItemsEight.append(spanEight, paraEight);
+
+helperList.append(
+  listItemsOne,
+  listItemsTwo,
+  listItemsThree,
+  listItemsFour,
+  listItemsFive,
+  listItemsSix,
+  listItemsSeven,
+  listItemsEight
+);
+homePageDiv.append(welcomePara, helperList);
 const dashboard = document.querySelector(".dashboard");
 dashboard.addEventListener("click", (event) => {
   if (event.target.tagName === "DIV") {
     mainContent.innerHTML = "";
-
-    const homePageDiv = document.createElement("div");
-    homePageDiv.classList.add("home-page");
-
-    const welcomePara = document.createElement("p");
-    welcomePara.textContent = "Instructions";
-
-    const helperList = document.createElement("ul");
-    helperList.classList.add("helper-list");
-
-    const listItemsOne = document.createElement("li");
-    listItemsOne.classList.add("list-items-one");
-    listItemsOne.textContent = "Add Task";
-    const spanOne = document.createElement("span");
-    spanOne.textContent = "-";
-    const paraOne = document.createElement("p");
-    paraOne.textContent = "Add your tasks";
-    listItemsOne.append(spanOne, paraOne);
-
-    const listItemsTwo = document.createElement("li");
-    listItemsTwo.classList.add("list-items-two");
-    listItemsTwo.textContent = "Inbox";
-    const spanTwo = document.createElement("span");
-    spanTwo.textContent = "-";
-    const paraTwo = document.createElement("p");
-    paraTwo.textContent = "Default storage for tasks";
-    listItemsTwo.append(spanTwo, paraTwo);
-
-    const listItemsThree = document.createElement("li");
-    listItemsThree.classList.add("list-items-three");
-    listItemsThree.textContent = "Today";
-    const spanThree = document.createElement("span");
-    spanThree.textContent = "-";
-    const paraThree = document.createElement("p");
-    paraThree.textContent = "Shows tasks that are due today";
-    listItemsThree.append(spanThree, paraThree);
-
-    const listItemsFour = document.createElement("li");
-    listItemsFour.classList.add("list-items-four");
-    listItemsFour.textContent = "Upcoming";
-    const spanFour = document.createElement("span");
-    spanFour.textContent = "-";
-    const paraFour = document.createElement("p");
-    paraFour.textContent = "Shows tasks that are due in the future";
-    listItemsFour.append(spanFour, paraFour);
-
-    const listItemsFive = document.createElement("li");
-    listItemsFive.classList.add("list-items-five");
-    listItemsFive.textContent = "My Projects";
-    const spanFive = document.createElement("span");
-    spanFive.textContent = "-";
-    const paraFive = document.createElement("p");
-    paraFive.textContent = "Add your own custom projects";
-    listItemsFive.append(spanFive, paraFive);
-
-    const listItemsSix = document.createElement("li");
-    listItemsSix.classList.add("list-items-six");
-    listItemsSix.textContent = "Clear All Tasks";
-    const spanSix = document.createElement("span");
-    spanSix.textContent = "-";
-    const paraSix = document.createElement("p");
-    paraSix.textContent = "Deletes all tasks from the app";
-    listItemsSix.append(spanSix, paraSix);
-
-    const listItemsSeven = document.createElement("li");
-    listItemsSeven.classList.add("list-items-six");
-    listItemsSeven.textContent = "Task Buttons";
-    const spanSeven = document.createElement("span");
-    spanSeven.textContent = "-";
-    const paraSeven = document.createElement("p");
-    paraSeven.textContent = "Change status, edit or delete task";
-    listItemsSeven.append(spanSeven, paraSeven);
-
-    helperList.append(
-      listItemsOne,
-      listItemsTwo,
-      listItemsThree,
-      listItemsFour,
-      listItemsFive,
-      listItemsSix,
-      listItemsSeven
-    );
-    homePageDiv.append(welcomePara, helperList);
-
     mainContent.appendChild(homePageDiv);
   }
 });
@@ -164,33 +174,35 @@ function createCancelStatusPromise() {
   });
 }
 
-createCancelStatusPromise();
-
 // Event listener to make the add task form visible after clicking add task button
 const addTaskBtn = document.querySelector(".add-task-btn");
 addTaskBtn.addEventListener("click", () => {
+  document.getElementById("add-task").textContent = "Add Task";
   taskForm.style.cssText = "visibility: visible;";
   taskFormContainer.style.cssText = "visibility: visible;";
   projectForm.style.cssText = "visibility: hidden;";
 });
 // Event listener to close the add task form upon clicking cancel
 cancelTaskBtn.addEventListener("click", () => {
-  rejectCancelStatus(); // Reject the promise when cancel is clicked
+  if (typeof rejectCancelStatus === "function") {
+    rejectCancelStatus(); // Reject the promise only when editing
+  }
   taskForm.reset();
   taskForm.style.cssText = "visibility: hidden";
   taskFormContainer.style.cssText = "visibility: hidden";
-  createCancelStatusPromise(); // Recreate the promise for the next use
 });
 
 // Event listener to submit add task form and get the formData
 taskForm.addEventListener("submit", (event) => {
-  resolveCancelStatus(); // Resolve the promise when form is submitted
+  if (typeof resolveCancelStatus === "function") {
+    resolveCancelStatus(); // Resolve promise only when it's an edit operation
+  }
+
   event.preventDefault();
   new FormData(taskForm);
   taskForm.reset();
   taskForm.style.cssText = "visibility: hidden";
   taskFormContainer.style.cssText = "visibility: hidden";
-  createCancelStatusPromise(); // Recreate the promise for the next use
 });
 
 // Creating a select dropdown, assigning the default option - "inbox" to it, then inserting it before the cancel button in add task form
@@ -227,17 +239,11 @@ taskForm.addEventListener("formdata", (e) => {
     projectValue
   );
 
-  //   Code to push todo into the currently selected project
+  // Push todo into the selected project
   projectsArray.forEach((item) => {
     if (item.projectName === projectValue) {
-      if (dataIndex) {
-        item.addTodo(todoObj, dataIndex);
-        dataIndex = null;
-      } else if (dataIndex === 0) {
-        item.addTodo(todoObj, 0);
-      } else {
-        item.addTodo(todoObj);
-      }
+      item.addTodo(todoObj, dataIndex); // Now correctly adds or replaces based on dataIndex
+      dataIndex = undefined; // Reset dataIndex after use
       storeProjectsArray(projectsArray);
       const lSProjectsArray = retrieveProjectsArray();
       displayProject(lSProjectsArray, projectValue);
@@ -310,7 +316,7 @@ projectForm.addEventListener("formdata", (e) => {
 newProjectsContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "DIV") {
     const dataProjectName = event.target.getAttribute("data-project-name");
-    storeProjectsArray(projectsArray);
+    //storeProjectsArray(projectsArray);
     const lSProjectsArray = retrieveProjectsArray();
     displayProject(lSProjectsArray, dataProjectName);
     expandStatus = false;
@@ -397,40 +403,39 @@ mainContent.addEventListener("click", (event) => {
   }
 
   if (event.target.classList.contains("edit-todo-btn")) {
-    // Ensure the promise is recreated every time before using it
-    createCancelStatusPromise();
+    createCancelStatusPromise(); // Recreate the cancel promise each time
 
-    const dataEditBtn = event.target.getAttribute("data-edit-btn");
+    const dataEditBtn = parseInt(event.target.getAttribute("data-edit-btn"));
     const dataProjectName = event.target.getAttribute("data-project-name");
     dataIndex = dataEditBtn;
 
     taskForm.style.cssText = "visibility: visible;";
     taskFormContainer.style.cssText = "visibility: visible;";
     projectForm.style.cssText = "visibility: hidden;";
+    document.getElementById("add-task").textContent = "Update Task";
 
-    // Logic for when the form is submitted
+    // Prefill form with existing todo values
     projectsArray.forEach((item) => {
       if (item.projectName === dataProjectName) {
-        item.todoList.forEach((todoObj) => {
-          if (item.todoList.indexOf(todoObj) == dataEditBtn) {
-            document.getElementById("task").value = todoObj.title;
-            document.getElementById("due-date").value = todoObj.dueDate;
-            document.getElementById("priority").value = todoObj.priority;
-            document.getElementById("description").value = todoObj.description;
-            document.getElementById("projects").value = todoObj.project;
-            // Wait for the promise to resolve or reject
-            cancelStatus
-              .then(() => {
-                delete item.todoList[dataEditBtn];
-              })
-              .catch(() => {
-                // Logic for when the cancel button is clicked
-                console.log("Editing cancelled.");
-              });
-          }
-        });
+        const selectedTodo = item.todoList[dataEditBtn];
+        document.getElementById("task").value = selectedTodo.title;
+        document.getElementById("due-date").value = selectedTodo.dueDate;
+        document.getElementById("priority").value = selectedTodo.priority;
+        document.getElementById("description").value = selectedTodo.description;
+        document.getElementById("projects").value = selectedTodo.project;
       }
     });
+
+    // Handle submission or cancellation
+    cancelStatus
+      .then(() => {
+        // Logic when form is submitted: handled in formdata listener
+      })
+      .catch(() => {
+        // Logic for cancel action
+        console.log("Editing cancelled.");
+        dataIndex = null; // Reset dataIndex if cancelled
+      });
   }
 
   if (event.target.classList.contains("delete-todo-btn")) {
