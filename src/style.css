@@ -31,7 +31,7 @@ body.dark {
   background-color: #292c35;
 }
 
-body.dark .input_wrapper input[type="checkbox"]{
+body.dark .input_wrapper input[type="checkbox"] {
   background-color: #f1f1f1;
 }
 
@@ -490,6 +490,7 @@ select[name="projects"]:focus {
 
 .todo-first-row > p:last-of-type {
   font-size: 1.25rem;
+  text-wrap: nowrap;
 }
 
 .todo-extension-div {
